@@ -11,7 +11,6 @@
       line-height: 1.6;
     }
 
-    /* 引入自定义字体 */
     @font-face {
       font-family: 'EuropaGrotesk';
       src: url('fonts/europa-grotesk-sh-bold.otf') format('opentype');
@@ -19,7 +18,6 @@
       font-style: normal;
     }
 
-    /* Header 样式 */
     #main-header {
       position: fixed;
       top: 0;
@@ -36,12 +34,10 @@
       z-index: 1000;
     }
 
-    /* 收起时向上移出 */
     #main-header.hidden {
       transform: translateY(-100%);
     }
 
-    /* 左侧区域（logo + 版本号） */
     .left-section {
       display: flex;
       align-items: center;
@@ -54,7 +50,7 @@
 
     .version {
       font-size: 12px;
-      color: #aaa; /* 浅灰色 */
+      color: #aaa;
       font-family: Arial, sans-serif;
     }
 
@@ -89,45 +85,33 @@
 <body>
 
   <header id="main-header">
-    <!-- 左侧 logo + 版本号 -->
     <div class="left-section">
-      <a href="#" class="logo">
+      <!-- 点击 logo 回主页（当前页，所以 # 或 index.html 都可以） -->
+      <a href="index.html" class="logo">
         <img src="img/logo.png" alt="TekcoUHPC Logo">
       </a>
-      <span class="version">v0.0.8</span>
+      <span class="version">v0.0.9</span>
     </div>
 
-    <!-- 右侧导航 -->
     <nav>
       <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Contacts</a></li>
+        <li><a href="#about">About Us</a></li>
+        <!-- Products 链接到 /products/ 页面 -->
+        <li><a href="products/">Products</a></li>
+        <li><a href="#contacts">Contacts</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <h1>Welcome to TekcoUHPC</h1>
+    <h1 id="about">Welcome to TekcoUHPC</h1>
     <p>
-      Scroll down this page to test the header auto-hide feature.  
-      The header will disappear when scrolling down, and reappear when scrolling up more than 50px.  
+      This is the homepage. Scroll down to see the header auto-hide feature.  
+      Click "Products" in the menu to go to the products page.
     </p>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
+    <p id="contacts">Contact section placeholder...</p>
   </main>
 
   <script>
@@ -138,11 +122,9 @@
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY) {
-        // 向下滚动 → 隐藏
         header.classList.add("hidden");
       } else {
-        // 向上滚动超过 50px → 展开
-        if (lastScrollY - currentScrollY > 20) {
+        if (lastScrollY - currentScrollY > 50) {
           header.classList.remove("hidden");
         }
       }
