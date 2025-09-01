@@ -2,17 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Static Website</title>
+  <title>TekcoUHPC</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
+      background-color: #fdfcf8;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #fdfcf8;
+      border-bottom: 1px solid #e0ded9;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #1b2a82; /* 鼠标悬停时变蓝 */
     }
   </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <p>This is my first static webpage.</p>
+
+  <header>
+    <!-- 左侧 logo -->
+    <a href="#" class="logo">
+      <img src="logo.png" alt="TekcoUHPC Logo">
+    </a>
+
+    <!-- 右侧导航按钮 -->
+    <nav>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+    </nav>
+  </header>
+
 </body>
 </html>
