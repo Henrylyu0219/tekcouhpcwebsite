@@ -41,8 +41,21 @@
       transform: translateY(-100%);
     }
 
+    /* 左侧区域（logo + 版本号） */
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .logo img {
       height: 40px;
+    }
+
+    .version {
+      font-size: 12px;
+      color: #aaa; /* 浅灰色 */
+      font-family: Arial, sans-serif;
     }
 
     nav ul {
@@ -58,7 +71,7 @@
       color: #333;
       font-family: 'EuropaGrotesk', Arial, sans-serif;
       font-weight: bold;
-      font-size: 22px;
+      font-size: 18px;
       transition: color 0.3s;
     }
 
@@ -66,7 +79,6 @@
       color: #1b2a82;
     }
 
-    /* 给内容区加顶部 padding，避免被 header 遮挡 */
     main {
       padding-top: 90px;
       max-width: 800px;
@@ -77,10 +89,13 @@
 <body>
 
   <header id="main-header">
-    <!-- 左侧 logo -->
-    <a href="#" class="logo">
-      <img src="img/logo.png" alt="TekcoUHPC Logo">
-    </a>
+    <!-- 左侧 logo + 版本号 -->
+    <div class="left-section">
+      <a href="#" class="logo">
+        <img src="img/logo.png" alt="TekcoUHPC Logo">
+      </a>
+      <span class="version">v0.0.8</span>
+    </div>
 
     <!-- 右侧导航 -->
     <nav>
@@ -113,16 +128,6 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
   </main>
 
   <script>
@@ -137,7 +142,7 @@
         header.classList.add("hidden");
       } else {
         // 向上滚动超过 50px → 展开
-        if (lastScrollY - currentScrollY > 50) {
+        if (lastScrollY - currentScrollY > 20) {
           header.classList.remove("hidden");
         }
       }
