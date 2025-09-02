@@ -56,34 +56,70 @@
 
     .hero{
       max-width:1200px; margin:0 auto; padding:0 24px;
-      display:grid; grid-template-columns: 1fr 1.2fr; gap:8px; align-items:center; min-height: calc(100vh - 90px);
+      display:grid; grid-template-columns: 1fr 1.2fr;
+      gap:48px; align-items:center;
+      min-height:calc(100vh - 90px); /* 垂直居中 */
     }
 
     .hero-visual{ display:flex; justify-content:center; }
-    .hero-visual img{ width:min(320px, 70%); height:auto; display:block; }
+    .hero-visual img{ width:min(380px, 90%); height:auto; display:block; }
 
-    .hero-text{ text-align:left; } /* 关键：整块左对齐 */
+    .hero-text{ text-align:left; }
 
     .hero-title{
       font-family:'EuropaGrotesk', Arial, sans-serif;
       font-weight:700; line-height:.9; color:var(--ink);
-      font-size:clamp(42px, 6vw, 120px);
+      font-size:clamp(60px, 9vw, 160px);
       margin:0 0 18px 0;
     }
     .hero-sub{
       font-family:'NunitoSansLocal', Arial, sans-serif;
-      font-size:clamp(12px, 2.2vw, 14px);
+      font-size:clamp(16px, 2.5vw, 24px);
       color:var(--muted);
       margin:0;
-      text-align:left; /* 防止被其他规则改成居中 */
+      text-align:left;
+    }
+
+    /* ===== Samples Section ===== */
+    .samples {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    .samples-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 每行4列 */
+      gap: 24px;
+    }
+
+    .sample {
+      background: #fff;
+      border: 1px solid #e0ded9;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sample img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
     }
 
     /* ===== Responsive ===== */
     @media (max-width:900px){
       .hero{ grid-template-columns:1fr; gap:28px; margin:6vh auto; }
       .hero-visual img{ width:min(420px,75%); }
-      .hero-text{ text-align:center; }      /* 小屏时整体居中 */
+      .hero-text{ text-align:center; }
       .hero-sub{ text-align:center; }
+
+      .samples-grid {
+        grid-template-columns: repeat(2, 1fr); /* 小屏改为2列 */
+      }
     }
   </style>
 </head>
@@ -95,7 +131,7 @@
       <a href="../index.html" class="logo">
         <img src="../img/logo.png" alt="TekcoUHPC Logo" />
       </a>
-      <span class="version">v0.0.6</span>
+      <span class="version">v0.0.7</span>
     </div>
 
     <nav>
@@ -117,6 +153,30 @@
       <div class="hero-text">
         <h1 class="hero-title">Our<br/>Products</h1>
         <p class="hero-sub">An elegant introduction of our concrete product collections.</p>
+      </div>
+    </section>
+
+    <!-- Samples Section -->
+    <section class="samples">
+      <div class="samples-grid">
+        <div class="sample"><img src="../img/sample1.png" alt="Sample 1"></div>
+        <div class="sample"><img src="../img/sample2.png" alt="Sample 2"></div>
+        <div class="sample"><img src="../img/sample3.png" alt="Sample 3"></div>
+        <div class="sample"><img src="../img/sample4.png" alt="Sample 4"></div>
+
+        <div class="sample"><img src="../img/sample5.png" alt="Sample 5"></div>
+        <div class="sample"><img src="../img/sample6.png" alt="Sample 6"></div>
+        <div class="sample"><img src="../img/sample7.png" alt="Sample 7"></div>
+        <div class="sample"><img src="../img/sample8.png" alt="Sample 8"></div>
+
+        <div class="sample"><img src="../img/sample9.png" alt="Sample 9"></div>
+        <div class="sample"><img src="../img/sample10.png" alt="Sample 10"></div>
+        <div class="sample"><img src="../img/sample11.png" alt="Sample 11"></div>
+        <div class="sample"><img src="../img/sample12.png" alt="Sample 12"></div>
+
+        <div class="sample"><img src="../img/sample13.png" alt="Sample 13"></div>
+        <div class="sample"><img src="../img/sample14.png" alt="Sample 14"></div>
+        <div class="sample"><img src="../img/sample15.png" alt="Sample 15"></div>
       </div>
     </section>
   </main>
