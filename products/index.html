@@ -12,11 +12,9 @@
       --divider:#e0ded9;
     }
 
-    /* ===== Base ===== */
     html,body{margin:0;padding:0;background:var(--bg)}
     body{font-family: Arial, sans-serif; line-height:1.6;}
 
-    /* ===== Fonts ===== */
     @font-face{
       font-family:'EuropaGrotesk';
       src:url('../fonts/europa-grotesk-sh-bold.otf') format('opentype');
@@ -28,7 +26,6 @@
       font-weight:400; font-style:normal;
     }
 
-    /* ===== Header ===== */
     #main-header{
       position:fixed; top:0; left:0; right:0; height:70px;
       display:flex; justify-content:space-between; align-items:center;
@@ -46,87 +43,68 @@
     nav a{
       text-decoration:none; color:#333;
       font-family:'EuropaGrotesk', Arial, sans-serif;
-      font-weight:700; font-size:18px; transition:color .2s;
+      font-weight:700; font-size:22px; transition:color .2s;
     }
     nav a:hover{ color:#1b2a82; }
     nav a.active{ color:#1b2a82; }
 
-    /* ===== Hero ===== */
     main{ padding-top:90px; }
 
     .hero{
-      max-width:1200px; margin:0 auto; padding:0 24px;
-      display:grid; grid-template-columns: 1fr 1.2fr;
-      gap:12px; align-items:center;
-      min-height:calc(100vh - 90px); /* 垂直居中 */
+      max-width:1200px; margin:8vh auto; padding:0 24px;
+      display:grid; grid-template-columns: 1fr 1.2fr; gap:48px; align-items:center;
     }
-
     .hero-visual{ display:flex; justify-content:center; }
-    .hero-visual img{ width:min(300px, 80%); height:auto; display:block; }
+    .hero-visual img{ width:min(380px, 90%); height:auto; display:block; }
 
     .hero-text{ text-align:left; }
-
     .hero-title{
       font-family:'EuropaGrotesk', Arial, sans-serif;
       font-weight:700; line-height:.9; color:var(--ink);
-      font-size:clamp(50px, 9vw, 120px);
+      font-size:clamp(48px, 8vw, 140px);
       margin:0 0 18px 0;
     }
     .hero-sub{
       font-family:'NunitoSansLocal', Arial, sans-serif;
-      font-size:clamp(12px, 2.5vw, 14px);
+      font-size:clamp(14px, 2.2vw, 20px);
       color:var(--muted);
       margin:0;
       text-align:left;
     }
 
-    /* ===== Samples Section ===== */
-    .samples {
-      max-width: 1200px;
-      margin: 60px auto;
-      padding: 0 24px;
-    }
-
-    .samples-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 每行4列 */
-      gap: 28px; /* ↑ 间距比原来更大 */
-    }
-
-    .sample {
-      background: #fff;
-      border: 1px solid #e0ded9;
-      border-radius: 8px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;   /* 垂直排列 */
-      align-items: flex-start;  /* 左对齐 */
-      gap: 8px;                 /* 图片和名字间距 */
-    }
-
-    .sample img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px;
-    }
-
-    .sample-name {
-      font-family:'NunitoSansLocal', Arial, sans-serif;
-      font-size:14px;
-      color:#333;
-    }
-
-    /* ===== Responsive ===== */
     @media (max-width:900px){
       .hero{ grid-template-columns:1fr; gap:28px; margin:6vh auto; }
       .hero-visual img{ width:min(420px,75%); }
       .hero-text{ text-align:center; }
       .hero-sub{ text-align:center; }
+    }
 
-      .samples-grid {
-        grid-template-columns: repeat(2, 1fr); /* 小屏改为2列 */
-      }
+    /* ===== Gallery ===== */
+    .collections{
+      max-width:1300px;
+      margin:60px auto;
+      padding:0 24px;
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap:32px;
+    }
+    .collection-item{
+      text-align:center;
+    }
+    .collection-item img{
+      width:100%; height:auto;
+      border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+      transition: transform .3s;
+    }
+    .collection-item img:hover{
+      transform: scale(1.05);
+    }
+    .collection-item p{
+      margin-top:12px;
+      font-family:'NunitoSansLocal', Arial, sans-serif;
+      font-size:16px; font-weight:500;
+      color:var(--ink);
     }
   </style>
 </head>
@@ -138,9 +116,8 @@
       <a href="../index.html" class="logo">
         <img src="../img/logo.png" alt="TekcoUHPC Logo" />
       </a>
-      <span class="version">v0.0.10</span>
+      <span class="version">v0.1.0</span>
     </div>
-
     <nav>
       <ul>
         <li><a href="../index.html#about">About Us</a></li>
@@ -156,34 +133,73 @@
       <div class="hero-visual">
         <img src="../img/ConcreteTitle72pp.png" alt="Concrete sample" />
       </div>
-
       <div class="hero-text">
         <h1 class="hero-title">Our<br/>Products</h1>
         <p class="hero-sub">An elegant introduction of our concrete product collections.</p>
       </div>
     </section>
 
-    <!-- Samples Section -->
-    <section class="samples">
-      <div class="samples-grid">
-        <div class="sample"><img src="../img/sample1.png" alt=""><span class="sample-name">Sample 1</span></div>
-        <div class="sample"><img src="../img/sample2.png" alt=""><span class="sample-name">Sample 2</span></div>
-        <div class="sample"><img src="../img/sample3.png" alt=""><span class="sample-name">Sample 3</span></div>
-        <div class="sample"><img src="../img/sample4.png" alt=""><span class="sample-name">Sample 4</span></div>
-
-        <div class="sample"><img src="../img/sample5.png" alt=""><span class="sample-name">Sample 5</span></div>
-        <div class="sample"><img src="../img/sample6.png" alt=""><span class="sample-name">Sample 6</span></div>
-        <div class="sample"><img src="../img/sample7.png" alt=""><span class="sample-name">Sample 7</span></div>
-        <div class="sample"><img src="../img/sample8.png" alt=""><span class="sample-name">Sample 8</span></div>
-
-        <div class="sample"><img src="../img/sample9.png" alt=""><span class="sample-name">Sample 9</span></div>
-        <div class="sample"><img src="../img/sample10.png" alt=""><span class="sample-name">Sample 10</span></div>
-        <div class="sample"><img src="../img/sample11.png" alt=""><span class="sample-name">Sample 11</span></div>
-        <div class="sample"><img src="../img/sample12.png" alt=""><span class="sample-name">Sample 12</span></div>
-
-        <div class="sample"><img src="../img/sample13.png" alt=""><span class="sample-name">Sample 13</span></div>
-        <div class="sample"><img src="../img/sample14.png" alt=""><span class="sample-name">Sample 14</span></div>
-        <div class="sample"><img src="../img/sample15.png" alt=""><span class="sample-name">Sample 15</span></div>
+    <!-- Collections Grid -->
+    <section class="collections">
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Travertine.png" alt="Travertine" />
+        <p>Travertine</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Damascus.png" alt="Damascus" />
+        <p>Damascus</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/BushHammered.png" alt="Bush Hammered" />
+        <p>Bush Hammered</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Taklamar.png" alt="Taklamar" />
+        <p>Taklamar</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/RawGrey.png" alt="Raw Grey" />
+        <p>Raw Grey</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/PrimeRaw.png" alt="Prime Raw" />
+        <p>Prime Raw</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/RawArchi.png" alt="Raw Archi" />
+        <p>Raw Archi</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Artisanal.png" alt="Artisanal" />
+        <p>Artisanal</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Wood.png" alt="Wood" />
+        <p>Wood</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/PatchWood.png" alt="Patch Wood" />
+        <p>Patch Wood</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Nature.png" alt="Nature" />
+        <p>Nature</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Colour.png" alt="Colour" />
+        <p>Colour</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Earth.png" alt="Earth" />
+        <p>Earth</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Cloud.png" alt="Cloud" />
+        <p>Cloud</p>
+      </div>
+      <div class="collection-item">
+        <img src="../img/ProductsCover/Knit.png" alt="Knit" />
+        <p>Knit</p>
       </div>
     </section>
   </main>
@@ -192,9 +208,17 @@
   <script>
     let lastScrollY = window.scrollY;
     const header = document.getElementById('main-header');
-    const sensitivity = 50; // 向上滑多少像素才展开
+    const sensitivity = 50;
 
     window.addEventListener('scroll', () => {
       const current = window.scrollY;
       if (current > lastScrollY) {
-        header.classList.a
+        header.classList.add('hidden');
+      } else if (lastScrollY - current > sensitivity) {
+        header.classList.remove('hidden');
+      }
+      lastScrollY = current;
+    });
+  </script>
+</body>
+</html>
