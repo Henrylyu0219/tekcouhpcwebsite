@@ -82,7 +82,7 @@
 
     /* ===== Samples Section ===== */
     .samples {
-      max-width: 1600px;
+      max-width: 1200px;
       margin: 60px auto;
       padding: 0 24px;
     }
@@ -90,7 +90,7 @@
     .samples-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr); /* 每行4列 */
-      gap: 24px;
+      gap: 28px; /* ↑ 间距比原来更大 */
     }
 
     .sample {
@@ -99,8 +99,9 @@
       border-radius: 8px;
       padding: 12px;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;   /* 垂直排列 */
+      align-items: flex-start;  /* 左对齐 */
+      gap: 8px;                 /* 图片和名字间距 */
     }
 
     .sample img {
@@ -108,6 +109,12 @@
       height: auto;
       display: block;
       border-radius: 4px;
+    }
+
+    .sample-name {
+      font-family:'NunitoSansLocal', Arial, sans-serif;
+      font-size:14px;
+      color:#333;
     }
 
     /* ===== Responsive ===== */
@@ -131,7 +138,7 @@
       <a href="../index.html" class="logo">
         <img src="../img/logo.png" alt="TekcoUHPC Logo" />
       </a>
-      <span class="version">v0.0.9</span>
+      <span class="version">v0.0.10</span>
     </div>
 
     <nav>
@@ -159,24 +166,24 @@
     <!-- Samples Section -->
     <section class="samples">
       <div class="samples-grid">
-        <div class="sample"><img src="../img/sample1.png" alt="Sample 1"></div>
-        <div class="sample"><img src="../img/sample2.png" alt="Sample 2"></div>
-        <div class="sample"><img src="../img/sample3.png" alt="Sample 3"></div>
-        <div class="sample"><img src="../img/sample4.png" alt="Sample 4"></div>
+        <div class="sample"><img src="../img/sample1.png" alt=""><span class="sample-name">Sample 1</span></div>
+        <div class="sample"><img src="../img/sample2.png" alt=""><span class="sample-name">Sample 2</span></div>
+        <div class="sample"><img src="../img/sample3.png" alt=""><span class="sample-name">Sample 3</span></div>
+        <div class="sample"><img src="../img/sample4.png" alt=""><span class="sample-name">Sample 4</span></div>
 
-        <div class="sample"><img src="../img/sample5.png" alt="Sample 5"></div>
-        <div class="sample"><img src="../img/sample6.png" alt="Sample 6"></div>
-        <div class="sample"><img src="../img/sample7.png" alt="Sample 7"></div>
-        <div class="sample"><img src="../img/sample8.png" alt="Sample 8"></div>
+        <div class="sample"><img src="../img/sample5.png" alt=""><span class="sample-name">Sample 5</span></div>
+        <div class="sample"><img src="../img/sample6.png" alt=""><span class="sample-name">Sample 6</span></div>
+        <div class="sample"><img src="../img/sample7.png" alt=""><span class="sample-name">Sample 7</span></div>
+        <div class="sample"><img src="../img/sample8.png" alt=""><span class="sample-name">Sample 8</span></div>
 
-        <div class="sample"><img src="../img/sample9.png" alt="Sample 9"></div>
-        <div class="sample"><img src="../img/sample10.png" alt="Sample 10"></div>
-        <div class="sample"><img src="../img/sample11.png" alt="Sample 11"></div>
-        <div class="sample"><img src="../img/sample12.png" alt="Sample 12"></div>
+        <div class="sample"><img src="../img/sample9.png" alt=""><span class="sample-name">Sample 9</span></div>
+        <div class="sample"><img src="../img/sample10.png" alt=""><span class="sample-name">Sample 10</span></div>
+        <div class="sample"><img src="../img/sample11.png" alt=""><span class="sample-name">Sample 11</span></div>
+        <div class="sample"><img src="../img/sample12.png" alt=""><span class="sample-name">Sample 12</span></div>
 
-        <div class="sample"><img src="../img/sample13.png" alt="Sample 13"></div>
-        <div class="sample"><img src="../img/sample14.png" alt="Sample 14"></div>
-        <div class="sample"><img src="../img/sample15.png" alt="Sample 15"></div>
+        <div class="sample"><img src="../img/sample13.png" alt=""><span class="sample-name">Sample 13</span></div>
+        <div class="sample"><img src="../img/sample14.png" alt=""><span class="sample-name">Sample 14</span></div>
+        <div class="sample"><img src="../img/sample15.png" alt=""><span class="sample-name">Sample 15</span></div>
       </div>
     </section>
   </main>
@@ -190,12 +197,4 @@
     window.addEventListener('scroll', () => {
       const current = window.scrollY;
       if (current > lastScrollY) {
-        header.classList.add('hidden');     // 向下：收起
-      } else if (lastScrollY - current > sensitivity) {
-        header.classList.remove('hidden');  // 向上超过阈值：展开
-      }
-      lastScrollY = current;
-    });
-  </script>
-</body>
-</html>
+        header.classList.a
