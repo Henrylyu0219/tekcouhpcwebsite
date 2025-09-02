@@ -2,39 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Products - TekcoUHPC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Products - TekcoUHPC</title>
   <style>
-    :root{
-      --bg:#fdfcf8;
-      --ink:#0a0a0a;
-      --muted:#6b6b6b;
-    }
+    :root{ --bg:#fdfcf8; --ink:#0a0a0a; --muted:#6b6b6b; }
 
-    /* ========= Base ========= */
-    html,body{margin:0;padding:0;background:var(--bg)}
-    body{font-family: Arial, sans-serif; line-height:1.6;}
+    html,body{ margin:0; padding:0; background:var(--bg); }
+    body{ font-family: Arial, sans-serif; line-height:1.6; }
 
-    /* ======== Fonts ======== */
+    /* 尝试加载自定义字体（即使失败也不影响渲染） */
     @font-face{
-      font-family: 'EuropaGrotesk';
-      src: url('../fonts/europa-grotesk-sh-bold.otf') format('opentype');
-      font-weight: 700; font-style: normal;
+      font-family:'EuropaGrotesk';
+      src:url('../fonts/europa-grotesk-sh-bold.otf') format('opentype');
+      font-weight:700; font-style:normal;
     }
     @font-face{
-      font-family: 'NunitoSansLocal';
-      src: url('../fonts/NunitoSans.ttf') format('truetype');
-      font-weight: 400; font-style: normal;
+      font-family:'NunitoSansLocal';
+      src:url('../fonts/NunitoSans.ttf') format('truetype');
+      font-weight:400; font-style:normal;
     }
 
-    /* ======== Header ======== */
+    /* Header */
     #main-header{
-      position:fixed; inset:0 0 auto 0; height:70px;
+      position:fixed; top:0; left:0; right:0; height:70px;
       display:flex; justify-content:space-between; align-items:center;
       padding:20px 50px; background:var(--bg);
       border-bottom:1px solid #e0ded9; transition:transform .3s ease; z-index:1000;
     }
-    #main-header.hidden{ transform: translateY(-100%); }
+    #main-header.hidden{ transform:translateY(-100%); }
 
     .left-section{ display:flex; align-items:center; gap:10px; }
     .logo img{ height:40px; display:block; }
@@ -49,21 +44,77 @@
     nav a:hover{ color:#1b2a82; }
     nav a.active{ color:#1b2a82; }
 
-    /* ======== Hero ======== */
+    /* 内容 */
     main{ padding-top:90px; }
-
     .hero{
       max-width:1200px; margin:8vh auto; padding:0 24px;
-      display:grid; grid-template-columns: 1fr 1.2fr; gap:48px; align-items:center;
+      display:grid; grid-template-columns:1fr 1.2fr; gap:48px; align-items:center;
+      /* 临时可视化边框，方便你确认区域是否渲染出来；上线后可删 */
+      /* outline:1px dashed #ddd; */
     }
-    /* 左侧图片 */
-    .hero-visual{
-      display:flex; justify-content:center;
+    .hero-visual{ display:flex; justify-content:center; }
+    .hero-visual img{ width:min(380px,90%); height:auto; display:block; }
+
+    .hero-title{
+      font-family:'EuropaGrotesk', Arial, sans-serif;
+      font-weight:700; line-height:.9; color:var(--ink);
+      font-size:clamp(48px, 8vw, 140px); margin:0 0 18px 0;
     }
-    .hero-visual img{
-      width:min(380px, 90%); height:auto; display:block;
+    .hero-sub{
+      font-family:'NunitoSansLocal', Arial, sans-serif;
+      font-size:clamp(14px, 2.2vw, 20px); color:var(--muted); margin:0;
     }
 
-    /* 右侧文字 */
-    .hero-title{
-      f
+    @media (max-width:900px){
+      .hero{ grid-template-columns:1fr; gap:28px; margin:6vh auto; }
+      .hero-visual img{ width:min(420px,75%); }
+      .hero-title, .hero-sub{ text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="main-header">
+    <div class="left-section">
+      <a href="../index.html" class="logo">
+        <img src="../img/logo.png" alt="TekcoUHPC Logo" />
+      </a>
+      <span class="version">v0.0.2</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html#about">About Us</a></li>
+        <li><a href="#" class="active">Products</a></li>
+        <li><a href="../index.html#contacts">Contacts</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-visual">
+        <!-- 关键：从 products/ 回到上级引用 img/ 下的图片 -->
+        <img src="../img/ConcreteTitle72pp.png" alt="Concrete sample" />
+      </div>
+      <div class="hero-text">
+        <h1 class="hero-title">Our<br>Products</h1>
+        <p class="hero-sub">An elegant introduction of our concrete product collections.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Header 隐藏/展开
+    let lastScrollY = window.scrollY;
+    const header = document.getElementById('main-header');
+    const sensitivity = 50;
+
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > lastScrollY) header.classList.add('hidden');
+      else if (lastScrollY - current > sensitivity) header.classList.remove('hidden');
+      lastScrollY = current;
+    });
+  </script>
+</body>
+</html>
