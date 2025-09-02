@@ -5,12 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Products - TekcoUHPC</title>
   <style>
-    :root{ --bg:#fdfcf8; --ink:#0a0a0a; --muted:#6b6b6b; }
+    :root{
+      --bg:#fdfcf8;
+      --ink:#0a0a0a;
+      --muted:#6b6b6b;
+      --divider:#e0ded9;
+    }
 
-    html,body{ margin:0; padding:0; background:var(--bg); }
-    body{ font-family: Arial, sans-serif; line-height:1.6; }
+    /* ===== Base ===== */
+    html,body{margin:0;padding:0;background:var(--bg)}
+    body{font-family: Arial, sans-serif; line-height:1.6;}
 
-    /* 尝试加载自定义字体（即使失败也不影响渲染） */
+    /* ===== Fonts ===== */
     @font-face{
       font-family:'EuropaGrotesk';
       src:url('../fonts/europa-grotesk-sh-bold.otf') format('opentype');
@@ -22,14 +28,15 @@
       font-weight:400; font-style:normal;
     }
 
-    /* Header */
+    /* ===== Header ===== */
     #main-header{
       position:fixed; top:0; left:0; right:0; height:70px;
       display:flex; justify-content:space-between; align-items:center;
       padding:20px 50px; background:var(--bg);
-      border-bottom:1px solid #e0ded9; transition:transform .3s ease; z-index:1000;
+      border-bottom:1px solid var(--divider);
+      transition:transform .3s ease; z-index:1000;
     }
-    #main-header.hidden{ transform:translateY(-100%); }
+    #main-header.hidden{ transform: translateY(-100%); }
 
     .left-section{ display:flex; align-items:center; gap:10px; }
     .logo img{ height:40px; display:block; }
@@ -38,49 +45,59 @@
     nav ul{ list-style:none; display:flex; gap:30px; margin:0; padding:0; }
     nav a{
       text-decoration:none; color:#333;
-      font-family:'EuropaGrotesk', Arial, sans-serif; font-weight:700; font-size:18px;
-      transition:color .2s;
+      font-family:'EuropaGrotesk', Arial, sans-serif;
+      font-weight:700; font-size:22px; transition:color .2s;
     }
     nav a:hover{ color:#1b2a82; }
     nav a.active{ color:#1b2a82; }
 
-    /* 内容 */
+    /* ===== Hero ===== */
     main{ padding-top:90px; }
+
     .hero{
       max-width:1200px; margin:8vh auto; padding:0 24px;
-      display:grid; grid-template-columns:0.8fr 1.2fr; gap:8px; align-items:center;
-      /* 临时可视化边框，方便你确认区域是否渲染出来；上线后可删 */
-      /* outline:1px dashed #ddd; */
+      display:grid; grid-template-columns: 1fr 1.2fr; gap:48px; align-items:center;
     }
+
     .hero-visual{ display:flex; justify-content:center; }
-    .hero-visual img{ width:min(380px,90%); height:auto; display:block; }
+    .hero-visual img{ width:min(380px, 90%); height:auto; display:block; }
+
+    .hero-text{ text-align:left; } /* 关键：整块左对齐 */
 
     .hero-title{
       font-family:'EuropaGrotesk', Arial, sans-serif;
-      font-weight:700; line-height:.85; color:var(--ink);
-      font-size:clamp(48px, 8vw, 140px); margin:0 0 18px 0;
+      font-weight:700; line-height:.9; color:var(--ink);
+      font-size:clamp(48px, 8vw, 140px);
+      margin:0 0 18px 0;
     }
     .hero-sub{
       font-family:'NunitoSansLocal', Arial, sans-serif;
-      font-size:clamp(14px, 2.2vw, 20px); color:var(--muted); margin:0;
+      font-size:clamp(14px, 2.2vw, 20px);
+      color:var(--muted);
+      margin:0;
+      text-align:left; /* 防止被其他规则改成居中 */
     }
 
+    /* ===== Responsive ===== */
     @media (max-width:900px){
       .hero{ grid-template-columns:1fr; gap:28px; margin:6vh auto; }
       .hero-visual img{ width:min(420px,75%); }
-      .hero-title, .hero-sub{ text-align:center; }
+      .hero-text{ text-align:center; }      /* 小屏时整体居中 */
+      .hero-sub{ text-align:center; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header id="main-header">
     <div class="left-section">
       <a href="../index.html" class="logo">
         <img src="../img/logo.png" alt="TekcoUHPC Logo" />
       </a>
-      <span class="version">v0.0.3</span>
+      <span class="version">v0.0.1</span>
     </div>
+
     <nav>
       <ul>
         <li><a href="../index.html#about">About Us</a></li>
@@ -90,29 +107,33 @@
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <main>
     <section class="hero">
       <div class="hero-visual">
-        <!-- 关键：从 products/ 回到上级引用 img/ 下的图片 -->
         <img src="../img/ConcreteTitle72pp.png" alt="Concrete sample" />
       </div>
+
       <div class="hero-text">
-        <h1 class="hero-title">Our<br>Products</h1>
+        <h1 class="hero-title">Our<br/>Products</h1>
         <p class="hero-sub">An elegant introduction of our concrete product collections.</p>
       </div>
     </section>
   </main>
 
+  <!-- Scroll hide / show header -->
   <script>
-    // Header 隐藏/展开
     let lastScrollY = window.scrollY;
     const header = document.getElementById('main-header');
-    const sensitivity = 50;
+    const sensitivity = 50; // 向上滑多少像素才展开
 
     window.addEventListener('scroll', () => {
       const current = window.scrollY;
-      if (current > lastScrollY) header.classList.add('hidden');
-      else if (lastScrollY - current > sensitivity) header.classList.remove('hidden');
+      if (current > lastScrollY) {
+        header.classList.add('hidden');     // 向下：收起
+      } else if (lastScrollY - current > sensitivity) {
+        header.classList.remove('hidden');  // 向上超过阈值：展开
+      }
       lastScrollY = current;
     });
   </script>
