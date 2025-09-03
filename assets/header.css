@@ -50,12 +50,14 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
 }
 .mobile-menu.is-open{ transform: translateY(0); opacity:1; pointer-events:auto; }
 
-/* 手机端菜单：用 Europa，去掉虚线分隔 */
+/* 手机端菜单：Europa Bold */
 .mobile-menu a{
-  display:block; padding:16px 20px;
-  text-decoration:none; color:var(--ink);
-  font-family:"europa", sans-serif;  /* Adobe Fonts */
-  font-weight:700;                   /* Bold */
+  display:block;
+  padding:16px 20px;
+  text-decoration:none;
+  color:var(--ink);
+  font-family:"europa", sans-serif !important; /* 强制使用 Europa */
+  font-weight:700 !important;                  /* Bold */
   border-bottom:none;
 }
 
@@ -74,12 +76,16 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
   .nav-desktop a:visited{
     position: relative; display:inline-block;
     text-decoration:none; color: var(--ink);
-    font-family:"europa", sans-serif;  /* Adobe Fonts */
-    font-weight:700;                    /* Bold */
+    font-family:"europa", sans-serif !important; /* 强制 Europa */
+    font-weight:700 !important;                  /* Bold */
     padding:6px 0; border:none; outline:none;
   }
   .nav-desktop a.active{
-    text-decoration:none; color:var(--ink); font-weight:700; border:none;
+    text-decoration:none;
+    color:var(--ink);
+    font-weight:700 !important;
+    border:none;
+    font-family:"europa", sans-serif !important;
   }
   .nav-desktop a:focus,
   .nav-desktop a:focus-visible,
@@ -88,10 +94,4 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
   /* 悬停横线动画（品牌蓝 → 尾端渐变黑） */
   .nav-desktop a::after{
     content:"";
-    position:absolute; left:0; bottom:0;
-    width:0%; height:2px;
-    background: linear-gradient(90deg, var(--brand) 0%, var(--brand) 75%, rgba(0,0,0,.45) 100%);
-    transition: width .28s ease;
-  }
-  .nav-desktop a:hover::after{ width:100%; }
-}
+    position:absolute; left:0; bot
