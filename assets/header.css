@@ -1,81 +1,104 @@
+/* ============ Vars & Base ============ */
 :root{
-  --bg:#fdfcf8; --ink:#0a0a0a; --divider:#e0ded9; --muted:#6b6b6b;
-  --header-h-desktop:72px; --header-h-mobile:64px;
+  --bg:#fdfcf8;
+  --ink:#0a0a0a;
+  --muted:#6b6b6b;
+  --divider:#e0ded9;
+  --brand:#1b2a82; /* Tekco 蓝 */
+  --h-mobile:64px;
+  --h-desktop:72px;
 }
 
-/* 字体（根路径，确保任何页面都能加载） */
-@font-face{
-  font-family:'EuropaGrotesk';
-  src:url('/tekcouhpcwebsite/fonts/europa-grotesk-sh-bold.otf') format('opentype');
-  font-weight:700; font-style:normal;
-}
-@font-face{
-  font-family:'NunitoSansLocal';
-  src:url('/tekcouhpcwebsite/fonts/NunitoSans.ttf') format('truetype');
-  font-weight:400; font-style:normal;
-}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
 
-/* 统一 Header */
+/* ============ Header ============ */
 #main-header{
-  position:fixed; inset:0 0 auto 0;
-  height:var(--header-h-desktop);
-  background:var(--bg); border-bottom:1px solid var(--divider);
+  position: sticky; top: 0; z-index: 1000;
+  height: var(--h-mobile);
   display:flex; align-items:center; justify-content:space-between;
-  padding:0 50px; box-sizing:border-box;
-  transition:transform .3s ease; z-index:1000;
+  padding: 0 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--divider);
 }
-#main-header.hidden{ transform:translateY(-100%); }
 
-.header-left{ display:flex; align-items:center; gap:10px; }
-.logo img{ height:40px; display:block; }
-.version{ font-size:12px; color:#aaa; font-family:Arial, sans-serif; }
+/* 左侧：logo + 版本号 */
+#main-header .header-left{display:flex; align-items:center; gap:12px;}
+#main-header .logo img{height:32px; display:block;}
+#main-header .version{font-size:12px; color:var(--muted);}
 
-/* 桌面导航 */
-.nav-desktop{ display:flex; gap:30px; align-items:center; }
-.nav-desktop a{
-  text-decoration:none; color:#333;
-  font-family:'EuropaGrotesk', Arial, sans-serif;
-  font-weight:700; font-size:16px; transition:color .2s;
-}
-.nav-desktop a:hover, .nav-desktop a.active{ color:#1b2a82; }
+/* 桌面导航（默认移动端隐藏；桌面在媒体查询里显示） */
+.nav-desktop{display:none; align-items:center; gap:28px;}
 
-/* 汉堡按钮（移动端显示） */
+/* 汉堡（移动端可见） */
 .menu-toggle{
-  display:none; width:34px; height:28px; position:relative; border:none;
-  background:transparent; cursor:pointer;
+  width:40px;height:40px; display:grid; place-items:center;
+  border:0; background:transparent; cursor:pointer;
 }
-.menu-toggle span, .menu-toggle::before, .menu-toggle::after{
-  content:''; position:absolute; left:0; right:0; height:3px; background:#333;
-  border-radius:2px; transition:transform .25s, opacity .25s;
+.menu-toggle span,
+.menu-toggle span::before,
+.menu-toggle span::after{
+  content:""; display:block; width:20px; height:2px; background:var(--ink);
+  transition:.2s;
 }
-.menu-toggle span{ top:50%; transform:translateY(-50%); }
-.menu-toggle::before{ top:4px; }
-.menu-toggle::after{ bottom:4px; }
-.menu-toggle.open span{ opacity:0; }
-.menu-toggle.open::before{ transform:translateY(10px) rotate(45deg); }
-.menu-toggle.open::after{ transform:translateY(-10px) rotate(-45deg); }
+.menu-toggle span::before{transform: translateY(-6px);}
+.menu-toggle span::after{transform: translateY(4px);}
 
-/* 移动菜单面板 */
+/* 移动端抽屉菜单 */
 .mobile-menu{
-  position:fixed; top:var(--header-h-mobile); left:0; right:0;
-  background:var(--bg); border-bottom:1px solid var(--divider);
-  display:none; flex-direction:column; gap:18px;
-  padding:16px 20px 22px; box-sizing:border-box; z-index:999;
+  position: fixed; left:0; right:0; top: var(--h-mobile);
+  background:#fff; border-top:1px solid var(--divider);
+  transform: translateY(-8px); opacity:0; pointer-events:none; transition:.2s;
 }
+.mobile-menu.is-open{ transform: translateY(0); opacity:1; pointer-events:auto; }
 .mobile-menu a{
-  text-decoration:none; color:#333;
-  font-family:'EuropaGrotesk', Arial, sans-serif;
-  font-weight:700; font-size:16px;
+  display:block; padding:16px 20px; text-decoration:none; color:var(--ink);
+  font-weight:700; border-bottom:1px dashed #eee;
 }
-.mobile-menu.show{ display:flex; }
 
-/* 页面内容要让出 header 的高度（每页可覆盖） */
-main{ padding-top:calc(var(--header-h-desktop) + 18px); }
+/* ============ Desktop tweaks ============ */
+@media (min-width: 900px){
+  #main-header{ height: var(--h-desktop); padding: 0 24px; }
+  #main-header .logo img{ height:36px; }
+  .menu-toggle{ display:none; }
+  .mobile-menu{ display:none; }
 
-/* 手机端 */
-@media (max-width:900px){
-  #main-header{ height:var(--header-h-mobile); padding:0 16px; }
-  .nav-desktop{ display:none; }
-  .menu-toggle{ display:block; }
-  main{ padding-top:calc(var(--header-h-mobile) + 18px); }
+  .nav-desktop{ display:flex; }
+
+  /* —— 导航链接：普通、active 一样 —— */
+  .nav-desktop a{
+    position: relative;           /* 为伪元素定位 */
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+    padding: 6px 0;               /* 让下划线有空间 */
+    display:inline-block;
+  }
+  .nav-desktop a.active{
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+  }
+
+  /* —— 悬停下划线动画（品牌蓝+渐变黑） —— */
+  .nav-desktop a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0%; height:2px;
+    background: linear-gradient(90deg,
+      var(--brand) 0%,
+      var(--brand) 75%,
+      rgba(0,0,0,.45) 100%        /* 尾端“加一点渐变黑” */
+    );
+    transition: width .28s ease;
+  }
+  .nav-desktop a:hover::after{ width:100%; }
+
+  /* 悬停时文字颜色略微加深（可选） */
+  .nav-desktop a:hover{ color: #0a0a0a; }
+
+  /* 低运动用户尊重系统偏好（可选） */
+  @media (prefers-reduced-motion: reduce){
+    .nav-desktop a::after{ transition: none; }
+  }
 }
