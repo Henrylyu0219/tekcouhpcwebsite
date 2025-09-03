@@ -21,7 +21,6 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
   border-bottom: 1px solid var(--divider);
 }
 
-/* 左侧：logo + 版本号 */
 #main-header .header-left{display:flex; align-items:center; gap:12px;}
 #main-header .logo img{height:32px; display:block;}
 #main-header .version{font-size:12px; color:var(--muted);}
@@ -50,9 +49,14 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
   transform: translateY(-8px); opacity:0; pointer-events:none; transition:.2s;
 }
 .mobile-menu.is-open{ transform: translateY(0); opacity:1; pointer-events:auto; }
+
+/* 手机端菜单：用 Europa，去掉虚线分隔 */
 .mobile-menu a{
-  display:block; padding:16px 20px; text-decoration:none; color:var(--ink);
-  font-weight:700; border-bottom:1px dashed #eee;
+  display:block; padding:16px 20px;
+  text-decoration:none; color:var(--ink);
+  font-family:"europa", sans-serif;  /* Adobe Fonts */
+  font-weight:700;                   /* Bold */
+  border-bottom:none;
 }
 
 /* ============ Desktop tweaks ============ */
@@ -64,61 +68,30 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
 
   .nav-desktop{ display:flex; }
 
-  /* —— 导航链接：普通、active 一样 —— */
+  /* 导航：Europa Bold；active 与普通一致 */
   .nav-desktop a,
   .nav-desktop a:link,
   .nav-desktop a:visited{
-    position: relative;
-    display:inline-block;
-    text-decoration: none !important;
-    color: var(--ink) !important;
-    font-weight: 500;
-    padding: 6px 0;
-    border: none !important;
-    outline: none !important;
+    position: relative; display:inline-block;
+    text-decoration:none; color: var(--ink);
+    font-family:"europa", sans-serif;  /* Adobe Fonts */
+    font-weight:700;                    /* Bold */
+    padding:6px 0; border:none; outline:none;
   }
-
-  /* 当前页 active 保持和普通一样 */
   .nav-desktop a.active{
-    text-decoration: none !important;
-    color: var(--ink) !important;
-    font-weight: 500;
-    border: none !important;
+    text-decoration:none; color:var(--ink); font-weight:700; border:none;
   }
-
-  /* 移除点击时的蓝色外框 */
   .nav-desktop a:focus,
   .nav-desktop a:focus-visible,
-  .nav-desktop a:active{
-    outline: none !important;
-    box-shadow: none !important;
-  }
+  .nav-desktop a:active{ outline:none; box-shadow:none; }
 
-  /* —— 悬停横线动画（品牌蓝 + 渐变黑） —— */
+  /* 悬停横线动画（品牌蓝 → 尾端渐变黑） */
   .nav-desktop a::after{
     content:"";
     position:absolute; left:0; bottom:0;
     width:0%; height:2px;
-    background: linear-gradient(
-      90deg,
-      var(--brand) 0%,
-      var(--brand) 75%,
-      rgba(0,0,0,.45) 100%
-    );
+    background: linear-gradient(90deg, var(--brand) 0%, var(--brand) 75%, rgba(0,0,0,.45) 100%);
     transition: width .28s ease;
   }
   .nav-desktop a:hover::after{ width:100%; }
-
-  /* 悬停时文字颜色略微加深（可选） */
-  .nav-desktop a:hover{ color: #0a0a0a; }
-
-  /* 尊重系统的“减少动态效果”设置 */
-  @media (prefers-reduced-motion: reduce){
-    .nav-desktop a::after{ transition: none; }
-  }
-}
-
-/* 可选：触屏设备点击时去掉灰色高亮 */
-@media (hover: none){
-  a { -webkit-tap-highlight-color: transparent; }
 }
