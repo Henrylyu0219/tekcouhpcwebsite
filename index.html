@@ -10,43 +10,51 @@
   <link rel="stylesheet" href="assets/header.css">
   <style>
     :root{
+      /* === adjust these two to change CARD SIZE === */
+      --ringW: 220px;   /* card width  -> smaller makes cards look smaller */
+      --ringH: 280px;   /* card height -> smaller increases top gap */
+      /* ============================================ */
+
       --bg:#fdfcf8; --ink:#0a0a0a; --muted:#6b6b6b;
-      --ringW: 260px; --ringH: 320px; /* smaller card to create visual gap */
-      --persp: 1200px; --cardRadius: 22px;
-      --edgeFade: 180px; /* stronger vignette */
+      --persp: 1100px;  /* perspective distance: smaller = stronger perspective */
+      --cardRadius: 22px;
+      --edgeFade: 220px; /* left/right vignette strength (px) */
     }
     html,body{margin:0;padding:0;background:var(--bg); color:var(--ink)}
     body{font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6}
     a{color:inherit;text-decoration:none}
 
-    /* Header host (header.js will render contents here) */
-    #site-header{position:sticky;top:0;z-index:50;background:var(--bg)}
+    /* Header host (header.js or fallback below) */
+    header.site-header{position:sticky;top:0;z-index:50;background:var(--bg)}
 
     /* Hero */
-    .hero{max-width:1200px;margin:64px auto 8px;padding:0 20px;text-align:center}
+    .hero{max-width:1200px;margin:58px auto 6px;padding:0 20px;text-align:center}
     .eyebrow{font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;
       font-size:clamp(16px,2.2vw,20px); opacity:.7; letter-spacing:.2px}
     .hero-title{font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;
       font-weight:700; font-size:clamp(36px,6vw,64px); margin:.2rem 0 .6rem}
-    .sub{max-width:820px;margin:0 auto 20px;color:var(--muted);font-size:clamp(14px,2vw,18px)}
-    .cta{display:inline-block;margin-top:8px;padding:12px 18px;border:1px solid #ddd;border-radius:14px;
+    .sub{max-width:820px;margin:0 auto 18px;color:var(--muted);font-size:clamp(14px,2vw,18px)}
+    .cta{display:inline-block;margin-top:6px;padding:10px 16px;border:1px solid #ddd;border-radius:14px;
       background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.06);}
     .cta:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(0,0,0,.08)}
 
     /* Ring carousel */
-    .ring-wrap{max-width:1200px;margin:28px auto 24px;padding:0 20px}
-    .ring-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .ring-wrap{max-width:1200px;margin:22px auto 18px;padding:0 20px}
+    .ring-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
     .ring-title{font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size: clamp(22px, 3vw, 34px); margin:0}
+      font-size: clamp(22px, 3vw, 30px); margin:0}
     .ring-ctrl{display:flex;gap:10px}
     .ring-btn{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:12px;
       cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.06);transition:.2s}
     .ring-btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,0,0,.08)}
 
     .ring-viewport{
-      position:relative; height: clamp(320px, 40vw, 460px); /* shorter than before */
+      position:relative; 
+      /* === adjust this to change carousel HEIGHT and top gap === */
+      height: clamp(300px, 36vw, 420px);
+      /* ======================================================== */
       perspective: var(--persp); perspective-origin: 50% 50%;
-      margin: 14px auto 8px; overflow: visible;
+      margin: 8px auto 6px; overflow: visible;
     }
     .ring-viewport::before, .ring-viewport::after{
       content:""; position:absolute; top:0; bottom:0; width:var(--edgeFade); pointer-events:none;
@@ -70,38 +78,44 @@
     }
     .ring-card .ph{position:absolute; inset:0; width:100%; height:100%; object-fit: cover; filter: saturate(1.02) contrast(1.05) brightness(.98);}
     .ring-card::after{content:""; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0) 60%);}
-    .ring-card .meta{position:relative; z-index:2; padding:14px 16px 16px;}
-    .ring-card h4{
-      margin:0; font-size:18px; font-weight:700;
-      font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      letter-spacing:.2px;
-    }
-    /* remove the subtitle completely */
-    .ring-card p{display:none}
+    .ring-card .meta{position:relative; z-index:2; padding:12px 14px 14px;}
+    .ring-card h4{margin:0; font-size:16px; font-weight:700; font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial; letter-spacing:.2px;}
+    .ring-card p{display:none} /* removed subtitle */
 
     .ring-caption{
       text-align:center;
       font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size: clamp(16px, 2.4vw, 22px);
+      font-size: clamp(16px, 2.2vw, 20px);
       font-weight: 700;
       letter-spacing:.2px;
       color: var(--ink);
-      margin: 6px 0 4px;
+      margin: 4px 0 2px;
     }
 
-    footer{border-top:1px solid #eae7e0;margin-top:28px;padding:24px 20px;color:#777;text-align:center;font-size:13px}
+    footer{border-top:1px solid #eae7e0;margin-top:20px;padding:18px 20px;color:#777;text-align:center;font-size:13px}
 
     @media (max-width: 1024px){
-      :root{ --ringW: 230px; --ringH: 300px; --persp: 900px; --edgeFade: 140px; }
+      :root{ --ringW: 200px; --ringH: 260px; --persp: 950px; --edgeFade: 160px; }
     }
     @media (max-width: 768px){
-      :root{ --ringW: 74vw; --ringH: 60vw; --persp: 800px; --edgeFade: 100px; }
-      .hero{margin-top:48px}
+      :root{ --ringW: 72vw; --ringH: 58vw; --persp: 820px; --edgeFade: 120px; }
+      .hero{margin-top:44px}
     }
   </style>
 </head>
 <body>
-  <header id="site-header"></header>
+  <!-- If header.js fails for任何原因，下面这段简单的header会显示；
+       如果 header.js 成功，它可以覆盖/隐藏这段（由你的脚本决定）。 -->
+  <header class="site-header">
+    <div class="header-fallback" style="max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="/" style="font-family:'EuropaGrotesk',system-ui,Arial;font-weight:700;">TekcoUHPC</a>
+      <nav style="display:flex;gap:18px;font-size:14px;">
+        <a href="/">Home</a>
+        <a href="products/">Products</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <section class="hero" id="about">
@@ -130,7 +144,13 @@
 
   <script>
   (function(){
-    // Ordered same as products page
+    /* === PARAMETERS you can tweak quickly === */
+    var CONCAVE = true;        // true = 凹进屏幕；false = 凸出屏幕
+    var RADIUS_SCALE = 1.6;    // >1 增加圆半径与卡片间距（约 20px 视觉）
+    var EMPHASIZE_MAX = 0.03;  // 中心卡片最大放大比例（0.03 = 放大3%）
+    var AUTO_SPEED = 0.05;     // 自动旋转速度（度/帧）
+    /* ======================================= */
+
     var items = [
       ["Travertine","./img/ProductsCover/Travertine.png"],
       ["Damascus","./img/ProductsCover/Damascus.png"],
@@ -168,23 +188,27 @@
     var cards = Array.prototype.slice.call(scene.children);
     var n = cards.length;
     var angleStep = 360 / n;
-    var radius = 520;          // base radius
-    var radiusScale = 1.25;    // bigger radius -> more spacing (~20px视觉)
+    var radius = 520;
     var current = 0;
     var auto = true;
 
     function baseTransform(i){
       var a = i * angleStep;
-      // Concave ring: translateZ negative, then rotate back 180deg so faces front
-      return 'translate3d(-50%,-50%,0) rotateY(' + a + 'deg) translateZ(' + (-radius) + 'px) rotateY(180deg)';
+      if(CONCAVE){
+        // 凹进：远离观察者，再旋转 180° 让正面朝向我们
+        return 'translate3d(-50%,-50%,0) rotateY(' + a + 'deg) translateZ(' + (-radius) + 'px) rotateY(180deg)';
+      } else {
+        // 凸出：靠近观察者
+        return 'translate3d(-50%,-50%,0) rotateY(' + a + 'deg) translateZ(' + radius + 'px)';
+      }
     }
 
     function layout(){
       var rect = cards[0].getBoundingClientRect();
-      var cardW = rect.width || 240;
+      var cardW = rect.width || 220;
       var theta = Math.PI * 2 / n;
       radius = Math.max( (cardW/2) / Math.sin(theta/2) + 40, 280 );
-      radius *= radiusScale; // add spacing
+      radius *= RADIUS_SCALE;
       for (var i=0;i<n;i++){
         cards[i].style.transform = baseTransform(i);
       }
@@ -218,10 +242,10 @@
         var a = (i * angleStep + norm) % 360;
         var dist = Math.min(a, 360 - a);
         var t = 1 - Math.min(dist/120, 1);
-        var scale = 1 + t * 0.05;
+        var scale = 1 + t * EMPHASIZE_MAX;
         cards[i].style.transform = baseTransform(i) + ' scale(' + scale + ')';
         cards[i].style.zIndex = 100 + Math.round(t*100);
-        cards[i].style.opacity = 0.78 + t*0.22;
+        cards[i].style.opacity = 0.8 + t*0.2;
       }
     }
 
@@ -231,9 +255,8 @@
       emphasize();
     }
 
-    var SPEED = 0.05;
     function tick(){
-      if(auto) current -= SPEED;
+      if(auto) current -= AUTO_SPEED;
       applyRotation(false);
       if((Date.now()|0) % 4 === 0) updateCaption();
       requestAnimationFrame(tick);
@@ -275,7 +298,14 @@
   })();
   </script>
 
-  <!-- Load header last to avoid blocking -->
-  <script src="assets/header.js" defer></script>
+  <!-- Try to load project header; fallback above will remain if this fails -->
+  <script>
+    (function(){
+      var s=document.createElement('script');
+      s.src="assets/header.js"; s.defer=true;
+      s.onerror=function(){ console.warn('header.js failed to load; showing fallback header.'); };
+      document.body.appendChild(s);
+    })();
+  </script>
 </body>
 </html>
