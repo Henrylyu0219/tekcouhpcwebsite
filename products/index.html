@@ -4,74 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Products - TekcoUHPC</title>
+  <link rel="stylesheet" href="/tekcouhpcwebsite/assets/header.css">
   <style>
-    :root{
-      --bg:#fdfcf8;
-      --ink:#0a0a0a;
-      --muted:#6b6b6b;
-      --divider:#e0ded9;
-    }
+    body{ margin:0; background:#fdfcf8; font-family:Arial, sans-serif; line-height:1.6; }
 
-    html,body{margin:0;padding:0;background:var(--bg)}
-    body{font-family: Arial, sans-serif; line-height:1.6;}
-
-    @font-face{
-      font-family:'EuropaGrotesk';
-      src:url('../fonts/europa-grotesk-sh-bold.otf') format('opentype');
-      font-weight:700; font-style:normal;
-    }
-    @font-face{
-      font-family:'NunitoSansLocal';
-      src:url('../fonts/NunitoSans.ttf') format('truetype');
-      font-weight:400; font-style:normal;
-    }
-
-    #main-header{
-      position:fixed; top:0; left:0; right:0; height:70px;
-      display:flex; justify-content:space-between; align-items:center;
-      padding:20px 50px; background:var(--bg);
-      border-bottom:1px solid var(--divider);
-      transition:transform .3s ease; z-index:1000;
-    }
-    #main-header.hidden{ transform: translateY(-100%); }
-
-    .left-section{ display:flex; align-items:center; gap:10px; }
-    .logo img{ height:40px; display:block; }
-    .version{ font-size:12px; color:#aaa; font-family:Arial, sans-serif; }
-
-    nav ul{ list-style:none; display:flex; gap:30px; margin:0; padding:0; }
-    nav a{
-      text-decoration:none; color:#333;
-      font-family:'EuropaGrotesk', Arial, sans-serif;
-      font-weight:700; font-size:18px; transition:color .2s;
-    }
-    nav a:hover{ color:#1b2a82; }
-    nav a.active{ color:#1b2a82; }
-
-    main{ padding-top:90px; }
-
+    /* Hero */
     .hero{
       max-width:1200px; margin:8vh auto; padding:0 24px;
-      display:grid; grid-template-columns: 1fr 1.2fr; gap:48px; align-items:center;
+      display:grid; grid-template-columns:1fr 1.2fr; gap:48px; align-items:center;
     }
     .hero-visual{ display:flex; justify-content:center; }
-    .hero-visual img{ width:min(380px, 90%); height:auto; display:block; }
-
+    .hero-visual img{ width:min(380px,90%); height:auto; display:block; }
     .hero-text{ text-align:left; }
     .hero-title{
       font-family:'EuropaGrotesk', Arial, sans-serif;
-      font-weight:700; line-height:.9; color:var(--ink);
-      font-size:clamp(48px, 8vw, 140px);
-      margin:0 0 18px 0;
+      font-weight:700; line-height:.9; color:#0a0a0a;
+      font-size:clamp(48px, 8vw, 140px); margin:0 0 18px 0;
     }
     .hero-sub{
       font-family:'NunitoSansLocal', Arial, sans-serif;
-      font-size:clamp(14px, 2.2vw, 20px);
-      color:var(--muted);
-      margin:0;
-      text-align:left;
+      font-size:clamp(14px, 2.2vw, 20px); color:#6b6b6b; margin:0; text-align:left;
     }
-
     @media (max-width:900px){
       .hero{ grid-template-columns:1fr; gap:28px; margin:6vh auto; }
       .hero-visual img{ width:min(420px,75%); }
@@ -79,59 +32,54 @@
       .hero-sub{ text-align:center; }
     }
 
-    /* ===== Gallery ===== */
+    /* Collections Grid */
     .collections{
-      max-width:1300px;
-      margin:60px auto;
-      padding:0 24px;
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      max-width:1300px; margin:60px auto; padding:0 24px;
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap:32px;
     }
-    .collection-item{
-      text-align:center;
-    }
+    .collection-item{ text-align:center; }
     .collection-item img{
-      width:100%; height:auto;
-      border-radius:8px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.08);
-      transition: transform .3s;
+      width:100%; height:auto; border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:transform .3s;
     }
-    .collection-item img:hover{
-      transform: scale(1.05);
-    }
+    .collection-item img:hover{ transform:scale(1.05); }
     .collection-item p{
-      margin-top:12px;
-      font-family:'NunitoSansLocal', Arial, sans-serif;
-      font-size:16px; font-weight:500;
-      color:var(--ink);
+      margin-top:12px; font-family:'NunitoSansLocal', Arial, sans-serif;
+      font-size:16px; font-weight:500; color:#0a0a0a;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- 统一 Header -->
   <header id="main-header">
-    <div class="left-section">
-      <a href="../index.html" class="logo">
-        <img src="../img/logo.png" alt="TekcoUHPC Logo" />
+    <div class="header-left">
+      <a href="/tekcouhpcwebsite/index.html" class="logo" aria-label="Home">
+        <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC Logo">
       </a>
-      <span class="version">v0.1.0</span>
+      <span class="version">v0.1.1</span>
     </div>
-    <nav>
-      <ul>
-        <li><a href="../index.html#about">About Us</a></li>
-        <li><a href="#" class="active">Products</a></li>
-        <li><a href="../index.html#contacts">Contacts</a></li>
-      </ul>
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+      <a href="/tekcouhpcwebsite/products/" class="active">Products</a>
+      <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
     </nav>
+    <button class="menu-toggle" aria-label="Open menu"><span></span></button>
   </header>
 
-  <!-- Hero Section -->
+  <!-- 移动端菜单 -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+    <a href="/tekcouhpcwebsite/products/">Products</a>
+    <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
+  </nav>
+
   <main>
+    <!-- Hero -->
     <section class="hero">
       <div class="hero-visual">
-        <img src="../img/ConcreteTitle72pp.png" alt="Concrete sample" />
+        <img src="/tekcouhpcwebsite/img/ConcreteTitle72pp.png" alt="Concrete sample" />
       </div>
       <div class="hero-text">
         <h1 class="hero-title">Our<br/>Products</h1>
@@ -141,84 +89,24 @@
 
     <!-- Collections Grid -->
     <section class="collections">
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Travertine.png" alt="Travertine" />
-        <p>Travertine</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Damascus.png" alt="Damascus" />
-        <p>Damascus</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/BushHammered.png" alt="Bush Hammered" />
-        <p>Bush Hammered</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Taklamar.png" alt="Taklamar" />
-        <p>Taklamar</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/RawGrey.png" alt="Raw Grey" />
-        <p>Raw Grey</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/PrimeRaw.png" alt="Prime Raw" />
-        <p>Prime Raw</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/RawArchi.png" alt="Raw Archi" />
-        <p>Raw Archi</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Artisanal.png" alt="Artisanal" />
-        <p>Artisanal</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Wood.png" alt="Wood" />
-        <p>Wood</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/PatchWood.png" alt="Patch Wood" />
-        <p>Patch Wood</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Nature.png" alt="Nature" />
-        <p>Nature</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Colour.png" alt="Colour" />
-        <p>Colour</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Earth.png" alt="Earth" />
-        <p>Earth</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Cloud.png" alt="Cloud" />
-        <p>Cloud</p>
-      </div>
-      <div class="collection-item">
-        <img src="../img/ProductsCover/Knit.png" alt="Knit" />
-        <p>Knit</p>
-      </div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Travertine.png" alt="Travertine"><p>Travertine</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Damascus.png" alt="Damascus"><p>Damascus</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/BushHammered.png" alt="Bush Hammered"><p>Bush Hammered</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Taklamar.png" alt="Taklamar"><p>Taklamar</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/RawGrey.png" alt="Raw Grey"><p>Raw Grey</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/PrimeRaw.png" alt="Prime Raw"><p>Prime Raw</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/RawArchi.png" alt="Raw Archi"><p>Raw Archi</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Artisanal.png" alt="Artisanal"><p>Artisanal</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Wood.png" alt="Wood"><p>Wood</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/PatchWood.png" alt="Patch Wood"><p>Patch Wood</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Nature.png" alt="Nature"><p>Nature</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Colour.png" alt="Colour"><p>Colour</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Earth.png" alt="Earth"><p>Earth</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Cloud.png" alt="Cloud"><p>Cloud</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Knit.png" alt="Knit"><p>Knit</p></div>
     </section>
   </main>
 
-  <!-- Scroll hide / show header -->
-  <script>
-    let lastScrollY = window.scrollY;
-    const header = document.getElementById('main-header');
-    const sensitivity = 50;
-
-    window.addEventListener('scroll', () => {
-      const current = window.scrollY;
-      if (current > lastScrollY) {
-        header.classList.add('hidden');
-      } else if (lastScrollY - current > sensitivity) {
-        header.classList.remove('hidden');
-      }
-      lastScrollY = current;
-    });
-  </script>
+  <script src="/tekcouhpcwebsite/assets/header.js"></script>
 </body>
 </html>
