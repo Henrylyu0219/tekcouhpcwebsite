@@ -65,30 +65,45 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
   .nav-desktop{ display:flex; }
 
   /* —— 导航链接：普通、active 一样 —— */
-  .nav-desktop a{
-    position: relative;           /* 为伪元素定位 */
-    text-decoration: none;
-    color: var(--ink);
-    font-weight: 500;
-    padding: 6px 0;               /* 让下划线有空间 */
+  .nav-desktop a,
+  .nav-desktop a:link,
+  .nav-desktop a:visited{
+    position: relative;
     display:inline-block;
-  }
-  .nav-desktop a.active{
-    color: var(--ink);
+    text-decoration: none !important;
+    color: var(--ink) !important;
     font-weight: 500;
-    text-decoration: none;
-    border: none;
+    padding: 6px 0;
+    border: none !important;
+    outline: none !important;
   }
 
-  /* —— 悬停下划线动画（品牌蓝+渐变黑） —— */
+  /* 当前页 active 保持和普通一样 */
+  .nav-desktop a.active{
+    text-decoration: none !important;
+    color: var(--ink) !important;
+    font-weight: 500;
+    border: none !important;
+  }
+
+  /* 移除点击时的蓝色外框 */
+  .nav-desktop a:focus,
+  .nav-desktop a:focus-visible,
+  .nav-desktop a:active{
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* —— 悬停横线动画（品牌蓝 + 渐变黑） —— */
   .nav-desktop a::after{
     content:"";
     position:absolute; left:0; bottom:0;
     width:0%; height:2px;
-    background: linear-gradient(90deg,
+    background: linear-gradient(
+      90deg,
       var(--brand) 0%,
       var(--brand) 75%,
-      rgba(0,0,0,.45) 100%        /* 尾端“加一点渐变黑” */
+      rgba(0,0,0,.45) 100%
     );
     transition: width .28s ease;
   }
@@ -97,8 +112,13 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
   /* 悬停时文字颜色略微加深（可选） */
   .nav-desktop a:hover{ color: #0a0a0a; }
 
-  /* 低运动用户尊重系统偏好（可选） */
+  /* 尊重系统的“减少动态效果”设置 */
   @media (prefers-reduced-motion: reduce){
     .nav-desktop a::after{ transition: none; }
   }
+}
+
+/* 可选：触屏设备点击时去掉灰色高亮 */
+@media (hover: none){
+  a { -webkit-tap-highlight-color: transparent; }
 }
