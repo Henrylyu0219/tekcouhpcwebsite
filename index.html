@@ -11,8 +11,8 @@
   <style>
     :root{
       /* === adjust these two to change CARD SIZE === */
-      --ringW: 220px;   /* card width  -> smaller makes cards look smaller */
-      --ringH: 280px;   /* card height -> smaller increases top gap */
+      --ringW: 128px;   /* card width  -> smaller makes cards look smaller */
+      --ringH: 128px;   /* card height -> smaller increases top gap */
       /* ============================================ */
 
       --bg:#fdfcf8; --ink:#0a0a0a; --muted:#6b6b6b;
@@ -51,7 +51,7 @@
     .ring-viewport{
       position:relative; 
       /* === adjust this to change carousel HEIGHT and top gap === */
-      height: clamp(300px, 36vw, 420px);
+      height: clamp(150px, 18vw, 200px);
       /* ======================================================== */
       perspective: var(--persp); perspective-origin: 50% 50%;
       margin: 8px auto 6px; overflow: visible;
@@ -145,10 +145,10 @@
   <script>
   (function(){
     /* === PARAMETERS you can tweak quickly === */
-    var CONCAVE = true;        // true = 凹进屏幕；false = 凸出屏幕
-    var RADIUS_SCALE = 1.6;    // >1 增加圆半径与卡片间距（约 20px 视觉）
+    var CONCAVE = false;        // true = 凹进屏幕；false = 凸出屏幕
+    var RADIUS_SCALE = 1;    // >1 增加圆半径与卡片间距（约 20px 视觉）
     var EMPHASIZE_MAX = 0.03;  // 中心卡片最大放大比例（0.03 = 放大3%）
-    var AUTO_SPEED = 0.05;     // 自动旋转速度（度/帧）
+    var AUTO_SPEED = 0.03;     // 自动旋转速度（度/帧）
     /* ======================================= */
 
     var items = [
