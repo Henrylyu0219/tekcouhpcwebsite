@@ -1,30 +1,37 @@
-// 滚动隐藏/展开
-let lastScrollY = window.scrollY;
-const header = document.getElementById('main-header');
-const sensitivity = 50;
+// 简洁：移动端汉堡开关 + 滚动显示/隐藏头部（如不需要可删掉滚动段）
+(function(){
+  const header = document.getElementById('main-header');
+  const toggle = document.querySelector('.menu-toggle');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-window.addEventListener('scroll', () => {
-  const cur = window.scrollY;
-  if (cur > lastScrollY) header.classList.add('hidden');
-  else if (lastScrollY - cur > sensitivity) header.classList.remove('hidden');
-  lastScrollY = cur;
-});
-
-// 汉堡开合
-const btn = document.querySelector('.menu-toggle');
-const panel = document.getElementById('mobileMenu');
-
-if (btn && panel) {
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('open');
-    panel.classList.toggle('show');
+  // 汉堡开合
+  toggle?.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('is-open');
+    document.body.style.overflow = open ? 'hidden' : '';
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
-  // 点击移动菜单链接后收起
-  panel.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      btn.classList.remove('open');
-      panel.classList.remove('show');
+  // 点击移动菜单内链接后自动收起
+  mobileMenu?.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    mobileMenu.classList.remove('is-open');
+    document.body.style.overflow = '';
+    toggle?.setAttribute('aria-expanded', 'false');
+  });
+
+  // （可选）滚动时隐藏/显示头部
+  let lastY = window.scrollY;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    window.requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const goingDown = y > lastY && y > 40;
+      header.style.transform = goingDown ? 'translateY(-100%)' : 'translateY(0)';
+      lastY = y;
+      ticking = false;
     });
-  });
-}
+    ticking = true;
+  }, { passive: true });
+})();
