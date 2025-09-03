@@ -7,20 +7,65 @@
   <title>TekcoUHPC</title>
   <link rel="stylesheet" href="/tekcouhpcwebsite/assets/header.css">
   <style>
-    body{ margin:0; background:#fdfcf8; font-family:Arial, sans-serif; line-height:1.6; }
-    main{ max-width:800px; margin:0 auto; padding:0 20px; }
-    h1{ font-family:'EuropaGrotesk', Arial, sans-serif; }
+    :root{
+      --bg:#fdfcf8; 
+      --ink:#0a0a0a;
+      --muted:#6b6b6b;
+      --card:#ffffff;
+      --ring:#e7e3db;
+      --accent:#0f172a;
+    }
+    html,body{margin:0;background:var(--bg)}
+    body{font-family:'nunito', Arial, sans-serif; color:var(--ink);}
+    h1,h2,h3,.hero-title,.logo-word{font-family:'EuropaGrotesk', Arial, sans-serif;}
+    a{color:inherit}
+    /* ===== Hero ===== */
+    .hero{max-width:1200px;margin:48px auto 24px;padding:0 24px;text-align:center}
+    .eyebrow{font-size:20px;letter-spacing:.02em; color:#3b3b3b}
+    .hero-title{font-size:clamp(28px,5vw,56px); line-height:1.1; font-weight:700; margin:.2em 0 .3em}
+    .sub{max-width:720px;margin:0 auto 24px;color:var(--muted)}
+    .cta{display:inline-block;background:#0a0a0a;color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;text-decoration:none}
+    .cta:focus-visible{outline:3px solid black; outline-offset:3px}
+    /* ===== Carousel ===== */
+    .rail-wrap{position:relative;max-width:1200px;margin:28px auto;padding:0 48px}
+    .rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:12px 0 28px;-webkit-overflow-scrolling:touch}
+    .rail::-webkit-scrollbar{height:10px}
+    .rail::-webkit-scrollbar-thumb{background:#d8d4cc;border-radius:6px}
+    .card{flex:0 0 270px;background:var(--card);border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.08);padding:14px;scroll-snap-align:center;border:1px solid var(--ring);transform:perspective(1000px) rotateY(var(--tilt,0deg));transition:transform .4s ease, box-shadow .3s ease, translate .3s ease}
+    .card:hover{translate:0 -2px; box-shadow:0 14px 36px rgba(0,0,0,.12)}
+    .card-figure{height:340px;border-radius:16px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#f5f2eb,#e7e3db)}
+    .card-figure img{width:100%;height:100%;object-fit:cover}
+    .card h4{margin:12px 8px 6px;font-weight:800}
+    .card p{margin:0 8px 10px;color:var(--muted)}
+    .card:nth-child(odd){--tilt:-7deg}
+    .card:nth-child(even){--tilt:7deg}
+    /* mask fade edges */
+    .rail-wrap:before,.rail-wrap:after{content:"";position:absolute;inset:0;pointer-events:none}
+    .rail-wrap:before{left:0;width:48px;background:linear-gradient(90deg,var(--bg),transparent)}
+    .rail-wrap:after{right:0;width:48px;background:linear-gradient(270deg,var(--bg),transparent)}
+    /* controls */
+    .controls{display:flex;gap:10px;justify-content:center;margin-top:8px}
+    .btn{appearance:none;border:1px solid var(--ring);background:#fff;border-radius:999px;padding:10px 14px;cursor:pointer}
+    .btn:active{transform:scale(.98)}
+    .features{max-width:1200px;margin:12px auto 60px;padding:0 24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .feature{background:#fff;border:1px solid var(--ring);border-radius:16px;padding:16px 18px}
+    .feature h5{margin:.2em 0 .3em;font-weight:800}
+    .feature p{margin:0;color:var(--muted)}
+    @media (max-width: 860px){
+      .rail-wrap{padding:0 16px}
+      .card{flex-basis:78vw}
+      .features{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
-
-  <!-- 统一 Header -->
+  <!-- Header -->
   <header id="main-header">
     <div class="header-left">
       <a href="/tekcouhpcwebsite/index.html" class="logo" aria-label="Home">
         <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC Logo">
       </a>
-      <span class="version">v0.1.1</span>
+      <span class="version">v0.2.0</span>
     </div>
     <nav class="nav-desktop" aria-label="Primary">
       <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
@@ -30,7 +75,7 @@
     <button class="menu-toggle" aria-label="Open menu"><span></span></button>
   </header>
 
-  <!-- 移动端菜单 -->
+  <!-- Mobile menu -->
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
     <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
     <a href="/tekcouhpcwebsite/products/">Products</a>
@@ -38,11 +83,216 @@
   </nav>
 
   <main>
-    <h1 id="about">Welcome to TekcoUHPC</h1>
-    <p>This is the homepage. Scroll down to see the header auto-hide feature.</p>
-    <p id="contacts">Contact section placeholder...</p>
+    <section class="hero" id="about">
+      <div class="eyebrow">Streamline Your Team,</div>
+      <h1 class="hero-title">Supercharge Your Workflow</h1>
+      <p class="sub">All‑in‑one platform to plan, collaborate, and deliver — faster and smarter.</p>
+      <a class="cta" href="/tekcouhpcwebsite/products/">Get started for Free</a>
+    </section>
+
+    <!-- Smooth scroll-snap carousel -->
+    <div class="rail-wrap">
+      <div class="rail" id="cardRail" aria-label="Showcase carousel">
+        <!-- Use existing product cover images as cards -->
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Travertine.png" alt="Travertine">
+          </figure>
+          <h4>Travertine</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Damascus.png" alt="Damascus">
+          </figure>
+          <h4>Damascus</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/BushHammered.png" alt="BushHammered">
+          </figure>
+          <h4>BushHammered</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Taklamar.png" alt="Taklamar">
+          </figure>
+          <h4>Taklamar</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/RawGrey.png" alt="RawGrey">
+          </figure>
+          <h4>RawGrey</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/PrimeRaw.png" alt="PrimeRaw">
+          </figure>
+          <h4>PrimeRaw</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/RawArchi.png" alt="RawArchi">
+          </figure>
+          <h4>RawArchi</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Artisanal.png" alt="Artisanal">
+          </figure>
+          <h4>Artisanal</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Wood.png" alt="Wood">
+          </figure>
+          <h4>Wood</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/PatchWood.png" alt="PatchWood">
+          </figure>
+          <h4>Patch Wood</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Nature.png" alt="Nature">
+          </figure>
+          <h4>Nature</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Colour.png" alt="Colour">
+          </figure>
+          <h4>Colour</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Earth.png" alt="Earth">
+          </figure>
+          <h4>Earth</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Cloud.png" alt="Cloud">
+          </figure>
+          <h4>Cloud</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+
+        <article class="card">
+          <figure class="card-figure">
+            <img src="/tekcouhpcwebsite/img/ProductsCover/Knit.png" alt="Knit">
+          </figure>
+          <h4>Knit</h4>
+          <p>UHPC surface — durable, tactile, and timeless.</p>
+        </article>
+      </div>
+      <div class="controls">
+        <button class="btn" data-dir="-1" aria-label="Scroll left">◀</button>
+        <button class="btn" data-dir="1" aria-label="Scroll right">▶</button>
+      </div>
+    </div>
+
+    <section class="features" aria-label="Features">
+      <div class="feature">
+        <h5>Real‑Time Collaboration</h5>
+        <p>Comment while working, share previews, sync with colleagues — without reloading.</p>
+      </div>
+      <div class="feature">
+        <h5>Task & Project Tracking</h5>
+        <p>Assign tasks, set milestones, and visualise progress with kanban and timelines.</p>
+      </div>
+      <div class="feature">
+        <h5>Performance Insights</h5>
+        <p>Understand what’s working. Make decisions with production metrics and beautiful dashboards.</p>
+      </div>
+    </section>
+
+    <p id="contacts" style="height:40vh"></p>
   </main>
 
   <script src="/tekcouhpcwebsite/assets/header.js"></script>
+  <script>
+    /* Drag to scroll + arrow buttons + autoplay (pauses on hover) */
+    const rail = document.getElementById('cardRail');
+    let isDown = false, startX = 0, scrollLeft = 0, autoTimer = null;
+
+    const start = (e) => {
+      isDown = true;
+      rail.classList.add('dragging');
+      startX = (e.pageX || e.touches?.[0].pageX) - rail.offsetLeft;
+      scrollLeft = rail.scrollLeft;
+    };
+    const move = (e) => {
+      if(!isDown) return;
+      e.preventDefault();
+      const x = (e.pageX || e.touches?.[0].pageX) - rail.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      rail.scrollLeft = scrollLeft - walk;
+    };
+    const end = () => { isDown=false; rail.classList.remove('dragging'); };
+
+    rail.addEventListener('mousedown', start);
+    rail.addEventListener('touchstart', start, {passive:true});
+    window.addEventListener('mousemove', move, {passive:false});
+    window.addEventListener('touchmove', move, {passive:false});
+    window.addEventListener('mouseup', end);
+    window.addEventListener('touchend', end);
+
+    // buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const w = rail.querySelector('.card').getBoundingClientRect().width + 20;
+        rail.scrollBy({left: w * Number(btn.dataset.dir), behavior: 'smooth'});
+      });
+    });
+
+    // autoplay
+    function auto(){
+      const w = rail.querySelector('.card').getBoundingClientRect().width + 20;
+      rail.scrollBy({left:w, behavior:'smooth'});
+      autoTimer = setTimeout(auto, 2800);
+    }
+    function pause(){ clearTimeout(autoTimer); autoTimer=null; }
+    rail.addEventListener('mouseenter', pause);
+    rail.addEventListener('mouseleave', ()=>{ if(!autoTimer) auto(); });
+    auto();
+
+    // wheel horizontal
+    rail.addEventListener('wheel', (e)=>{
+      if(Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        rail.scrollBy({left: e.deltaY, behavior: 'smooth'});
+        e.preventDefault();
+      }
+    }, {passive:false});
+  </script>
 </body>
 </html>
