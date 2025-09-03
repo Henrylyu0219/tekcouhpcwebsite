@@ -4,25 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TekcoUHPC — Ultra‑High‑Performance Concrete</title>
-  <!-- Brand fonts -->
   <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css">
-  <!-- Site header/nav styles (existing in your project) -->
   <link rel="stylesheet" href="assets/header.css">
   <style>
     :root{
       --bg:#fdfcf8; --ink:#0a0a0a; --muted:#6b6b6b;
-      --ringW: 280px; --ringH: 360px; --persp: 1200px;
-      --cardRadius: 22px;
-      --accent:#111;
+      --ringW: 280px; --ringH: 360px; --persp: 1200px; --cardRadius: 22px;
     }
     html,body{margin:0;padding:0;background:var(--bg); color:var(--ink)}
     body{font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6}
     a{color:inherit;text-decoration:none}
-
-    /* --- Header placeholder (your header.js will populate) --- */
     #site-header{position:sticky;top:0;z-index:50;background:var(--bg)}
 
-    /* --- Hero --- */
     .hero{max-width:1200px;margin:72px auto 18px;padding:0 20px;text-align:center}
     .eyebrow{font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;
       font-size:clamp(16px,2.2vw,20px); opacity:.7; letter-spacing:.2px}
@@ -33,7 +26,6 @@
       background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.06);}
     .cta:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(0,0,0,.08)}
 
-    /* --- Ring carousel --- */
     .ring-wrap{max-width:1200px;margin:42px auto 28px;padding:0 20px}
     .ring-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
     .ring-title{font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;
@@ -66,6 +58,7 @@
       box-shadow:0 14px 40px rgba(0,0,0,.12);
       overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end;
       color:#fff; transition:filter .2s, transform .2s;
+      background: linear-gradient(135deg,#8e8e8e,#3a3a3a);
     }
     .ring-card .ph{
       position:absolute; inset:0;
@@ -90,13 +83,11 @@
       margin: 10px 0 8px;
     }
 
-    /* --- Features --- */
     .ring-features{max-width:1100px;margin:10px auto 48px;padding:0 20px;
       display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .ring-features h4{margin:.2rem 0;font-size:16px;font-family:'EuropaGrotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial;}
     .ring-features p{margin:0;color:var(--muted);font-size:14px}
 
-    /* --- Footer --- */
     footer{border-top:1px solid #eae7e0;margin-top:36px;padding:24px 20px;color:#777;text-align:center;font-size:13px}
 
     @media (max-width: 1024px){
@@ -113,7 +104,6 @@
   <header id="site-header"></header>
 
   <main>
-    <!-- Hero -->
     <section class="hero" id="about">
       <div class="eyebrow">Streamline Your Team,</div>
       <h1 class="hero-title">Supercharge Your Workflow</h1>
@@ -121,20 +111,18 @@
       <a class="cta" href="products/">Explore Collections</a>
     </section>
 
-    <!-- Ring Carousel -->
     <section class="ring-wrap" id="showcase">
       <div class="ring-head">
         <h2 class="ring-title">Collections Showcase</h2>
         <div class="ring-ctrl">
-          <button class="ring-btn" id="ringPrev" aria-label="Previous">◀</button>
-          <button class="ring-btn" id="ringNext" aria-label="Next">▶</button>
+          <button class="ring-btn" id="ringPrev" aria-label="Previous">&#9664;</button>
+          <button class="ring-btn" id="ringNext" aria-label="Next">&#9654;</button>
         </div>
       </div>
-
       <div class="ring-viewport">
         <div class="ring-scene" id="ringScene" aria-live="polite"></div>
       </div>
-      <div class="ring-caption" id="ringCaption"></div>
+      <div class="ring-caption" id="ringCaption">Loading…</div>
 
       <div class="ring-features">
         <div><h4>Real-Time Collaboration</h4><p>Sync across teams with smooth updates.</p></div>
@@ -146,89 +134,84 @@
 
   <footer>© TekcoUHPC. All rights reserved.</footer>
 
-  <!-- Your existing header behavior -->
-  <script src="assets/header.js"></script>
-
-  <!-- 3D Ring Carousel -->
+  <!-- Carousel script -->
   <script>
-  (() => {
-    // Keep order consistent with products page
-    const items = [
-      ["Travertine","img/ProductsCover/Travertine.png"],
-      ["Damascus","img/ProductsCover/Damascus.png"],
-      ["Bush Hammered","img/ProductsCover/BushHammered.png"],
-      ["Taklamar","img/ProductsCover/Taklamar.png"],
-      ["Raw Grey","img/ProductsCover/RawGrey.png"],
-      ["Prime Raw","img/ProductsCover/PrimeRaw.png"],
-      ["Raw Archi","img/ProductsCover/RawArchi.png"],
-      ["Artisanal","img/ProductsCover/Artisanal.png"],
-      ["Wood","img/ProductsCover/Wood.png"],
-      ["Patch Wood","img/ProductsCover/PatchWood.png"],
-      ["Nature","img/ProductsCover/Nature.png"],
-      ["Colour","img/ProductsCover/Colour.png"],
-      ["Earth","img/ProductsCover/Earth.png"],
-      ["Cloud","img/ProductsCover/Cloud.png"],
-      ["Knit","img/ProductsCover/Knit.png"]
+  (function(){
+    var items = [
+      ["Travertine","./img/ProductsCover/Travertine.png"],
+      ["Damascus","./img/ProductsCover/Damascus.png"],
+      ["Bush Hammered","./img/ProductsCover/BushHammered.png"],
+      ["Taklamar","./img/ProductsCover/Taklamar.png"],
+      ["Raw Grey","./img/ProductsCover/RawGrey.png"],
+      ["Prime Raw","./img/ProductsCover/PrimeRaw.png"],
+      ["Raw Archi","./img/ProductsCover/RawArchi.png"],
+      ["Artisanal","./img/ProductsCover/Artisanal.png"],
+      ["Wood","./img/ProductsCover/Wood.png"],
+      ["Patch Wood","./img/ProductsCover/PatchWood.png"],
+      ["Nature","./img/ProductsCover/Nature.png"],
+      ["Colour","./img/ProductsCover/Colour.png"],
+      ["Earth","./img/ProductsCover/Earth.png"],
+      ["Cloud","./img/ProductsCover/Cloud.png"],
+      ["Knit","./img/ProductsCover/Knit.png"]
     ];
 
-    const scene = document.getElementById('ringScene');
-    const btnPrev = document.getElementById('ringPrev');
-    const btnNext = document.getElementById('ringNext');
-    const caption = document.getElementById('ringCaption');
+    var scene = document.getElementById('ringScene');
+    var btnPrev = document.getElementById('ringPrev');
+    var btnNext = document.getElementById('ringNext');
+    var caption = document.getElementById('ringCaption');
 
-    // Render cards
-    items.forEach(([name, src]) => {
-      const card = document.createElement('figure');
+    // Render cards (no template literals to avoid token issues)
+    for (var i=0;i<items.length;i++){
+      var name = items[i][0]; var src = items[i][1];
+      var card = document.createElement('figure');
       card.className = 'ring-card';
-      card.innerHTML = \`
-        <img class="ph" alt="\${name}" src="\${src}">
-        <figcaption class="meta">
-          <h4>\${name}</h4>
-          <p>UHPC decorative surface</p>
-        </figcaption>\`;
+      var html = '' +
+        '<img class="ph" alt="' + name + '" src="' + src + '" onerror="this.style.display=\'none\'">' +
+        '<figcaption class="meta">' +
+          '<h4>' + name + '</h4>' +
+          '<p>UHPC decorative surface</p>' +
+        '</figcaption>';
+      card.innerHTML = html;
       scene.appendChild(card);
-    });
+    }
 
-    const cards = [...scene.children];
-    const n = cards.length;
-    const angleStep = 360 / n;
-    let radius = 500;
-    let current = 0;
-    let auto = true;
-    let dragging = false, startX = 0, startAngle = 0;
+    var cards = Array.prototype.slice.call(scene.children);
+    var n = cards.length;
+    var angleStep = 360 / n;
+    var radius = 500;
+    var current = 0;
+    var auto = true;
+
+    function baseTransform(i){
+      var a = i * angleStep;
+      return 'translate3d(-50%,-50%,0) rotateY(' + a + 'deg) translateZ(' + radius + 'px)';
+    }
 
     function layout(){
-      const cardW = cards[0].getBoundingClientRect().width;
-      const theta = Math.PI * 2 / n;
+      var rect = cards[0].getBoundingClientRect();
+      var cardW = rect.width || 260;
+      var theta = Math.PI * 2 / n;
       radius = Math.max( (cardW/2) / Math.sin(theta/2) + 30, 260 );
-      cards.forEach((el,i) => {
-        const a = i * angleStep;
-        el.style.transform = \`translate3d(-50%,-50%,0) rotateY(\${a}deg) translateZ(\${radius}px)\`;
-      });
+      for (var i=0;i<n;i++){
+        cards[i].style.transform = baseTransform(i);
+      }
       applyRotation(true);
     }
 
-    function applyRotation(force=false){
-      scene.style.transform = \`rotateY(\${current}deg)\`;
-      if(force) updateCaption();
-      // Optional: emphasize central card by scale based on facing
-      emphasize();
-    }
-
     function getActiveIndex(){
-      const norm = ((current % 360) + 360) % 360;
-      let bestI = 0, bestDiff = 1e9;
-      for(let i=0;i<n;i++){
-        const a = (i * angleStep + norm) % 360;
-        const d = Math.min(a, 360 - a);
+      var norm = ((current % 360) + 360) % 360;
+      var bestI = 0, bestDiff = 1e9;
+      for (var i=0;i<n;i++){
+        var a = (i * angleStep + norm) % 360;
+        var d = Math.min(a, 360 - a);
         if(d < bestDiff){ bestDiff = d; bestI = i; }
       }
       return bestI;
     }
 
-    let lastActive = -1;
+    var lastActive = -1;
     function updateCaption(){
-      const idx = getActiveIndex();
+      var idx = getActiveIndex();
       if(idx === lastActive) return;
       caption.textContent = items[idx][0];
       if(lastActive >= 0) cards[lastActive].style.filter = '';
@@ -236,75 +219,71 @@
       lastActive = idx;
     }
 
-    // Subtle emphasize: cards closer to front are slightly brighter & bigger
     function emphasize(){
-      const norm = ((current % 360) + 360) % 360;
-      cards.forEach((el,i)=>{
-        const a = (i * angleStep + norm) % 360;
-        const dist = Math.min(a, 360 - a); // 0..180
-        const t = 1 - Math.min(dist/120, 1); // near front -> 1
-        const scale = 1 + t * 0.06;
-        el.style.transform += \` scale(\${scale})\`;
-        el.style.zIndex = 100 + Math.round(t*100);
-        el.style.opacity = 0.75 + t*0.25;
-      });
+      var norm = ((current % 360) + 360) % 360;
+      for (var i=0;i<n;i++){
+        var a = (i * angleStep + norm) % 360;
+        var dist = Math.min(a, 360 - a);
+        var t = 1 - Math.min(dist/120, 1);
+        var scale = 1 + t * 0.06;
+        cards[i].style.transform = baseTransform(i) + ' scale(' + scale + ')';
+        cards[i].style.zIndex = 100 + Math.round(t*100);
+        cards[i].style.opacity = 0.75 + t*0.25;
+      }
     }
 
-    // Autoplay
-    const SPEED = 0.05;
+    function applyRotation(force){
+      scene.style.transform = 'rotateY(' + current + 'deg)';
+      if(force) updateCaption();
+      emphasize();
+    }
+
+    var SPEED = 0.05;
     function tick(){
       if(auto) current -= SPEED;
       applyRotation(false);
-      if((performance.now()|0) % 4 === 0) updateCaption();
+      if((Date.now()|0) % 4 === 0) updateCaption();
       requestAnimationFrame(tick);
     }
 
-    // Hover pause
-    scene.addEventListener('mouseenter', ()=> auto = false);
-    scene.addEventListener('mouseleave', ()=> auto = true);
+    scene.addEventListener('mouseenter', function(){ auto = false; });
+    scene.addEventListener('mouseleave', function(){ auto = true; });
 
-    // Drag / touch
+    var dragging = false, startX = 0, startAngle = 0;
     function dragStart(x){ dragging = true; startX = x; startAngle = current; auto = false; }
-    function dragMove(x){
-      if(!dragging) return;
-      const dx = x - startX;
-      current = startAngle + dx * 0.25;
-      applyRotation(false);
-      updateCaption();
-    }
+    function dragMove(x){ if(!dragging) return; var dx = x - startX; current = startAngle + dx * 0.25; applyRotation(false); updateCaption(); }
     function dragEnd(){ dragging = false; auto = true; }
 
-    scene.addEventListener('pointerdown', e => { scene.setPointerCapture(e.pointerId); dragStart(e.clientX); });
-    window.addEventListener('pointermove', e => dragMove(e.clientX));
+    scene.addEventListener('pointerdown', function(e){ if(scene.setPointerCapture) scene.setPointerCapture(e.pointerId); dragStart(e.clientX); });
+    window.addEventListener('pointermove', function(e){ dragMove(e.clientX); });
     window.addEventListener('pointerup', dragEnd);
-    scene.addEventListener('touchstart', e => dragStart(e.touches[0].clientX), {passive:true});
-    window.addEventListener('touchmove',  e => dragMove(e.touches[0].clientX), {passive:true});
+
+    scene.addEventListener('touchstart', function(e){ dragStart(e.touches[0].clientX); }, {passive:true});
+    window.addEventListener('touchmove',  function(e){ dragMove(e.touches[0].clientX); }, {passive:true});
     window.addEventListener('touchend',   dragEnd);
 
-    // Wheel control
-    scene.addEventListener('wheel', e => {
+    scene.addEventListener('wheel', function(e){
       e.preventDefault();
       current += e.deltaY * 0.15;
       applyRotation(false);
       updateCaption();
       auto = false;
       clearTimeout(scene._wheelT);
-      scene._wheelT = setTimeout(()=> auto = true, 1200);
+      scene._wheelT = setTimeout(function(){ auto = true; }, 1200);
     }, {passive:false});
 
-    // Buttons
-    document.getElementById('ringPrev')?.addEventListener('click', () => {
-      current += angleStep; applyRotation(true); auto = false; setTimeout(()=>auto=true, 1500);
-    });
-    document.getElementById('ringNext')?.addEventListener('click', () => {
-      current -= angleStep; applyRotation(true); auto = false; setTimeout(()=>auto=true, 1500);
-    });
+    if(btnPrev) btnPrev.addEventListener('click', function(){ current += angleStep; applyRotation(true); auto = false; setTimeout(function(){auto=true;}, 1500); });
+    if(btnNext) btnNext.addEventListener('click', function(){ current -= angleStep; applyRotation(true); auto = false; setTimeout(function(){auto=true;}, 1500); });
 
     window.addEventListener('resize', layout);
+    window.addEventListener('DOMContentLoaded', layout);
     layout();
     updateCaption();
     tick();
   })();
   </script>
+
+  <!-- load your header after carousel to avoid blocking -->
+  <script src="assets/header.js" defer></script>
 </body>
 </html>
