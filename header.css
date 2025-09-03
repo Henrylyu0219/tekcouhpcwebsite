@@ -1,0 +1,81 @@
+:root{
+  --bg:#fdfcf8; --ink:#0a0a0a; --divider:#e0ded9; --muted:#6b6b6b;
+  --header-h-desktop:72px; --header-h-mobile:64px;
+}
+
+/* 字体（根路径，确保任何页面都能加载） */
+@font-face{
+  font-family:'EuropaGrotesk';
+  src:url('/tekcouhpcwebsite/fonts/europa-grotesk-sh-bold.otf') format('opentype');
+  font-weight:700; font-style:normal;
+}
+@font-face{
+  font-family:'NunitoSansLocal';
+  src:url('/tekcouhpcwebsite/fonts/NunitoSans.ttf') format('truetype');
+  font-weight:400; font-style:normal;
+}
+
+/* 统一 Header */
+#main-header{
+  position:fixed; inset:0 0 auto 0;
+  height:var(--header-h-desktop);
+  background:var(--bg); border-bottom:1px solid var(--divider);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 50px; box-sizing:border-box;
+  transition:transform .3s ease; z-index:1000;
+}
+#main-header.hidden{ transform:translateY(-100%); }
+
+.header-left{ display:flex; align-items:center; gap:10px; }
+.logo img{ height:40px; display:block; }
+.version{ font-size:12px; color:#aaa; font-family:Arial, sans-serif; }
+
+/* 桌面导航 */
+.nav-desktop{ display:flex; gap:30px; align-items:center; }
+.nav-desktop a{
+  text-decoration:none; color:#333;
+  font-family:'EuropaGrotesk', Arial, sans-serif;
+  font-weight:700; font-size:22px; transition:color .2s;
+}
+.nav-desktop a:hover, .nav-desktop a.active{ color:#1b2a82; }
+
+/* 汉堡按钮（移动端显示） */
+.menu-toggle{
+  display:none; width:34px; height:28px; position:relative; border:none;
+  background:transparent; cursor:pointer;
+}
+.menu-toggle span, .menu-toggle::before, .menu-toggle::after{
+  content:''; position:absolute; left:0; right:0; height:3px; background:#333;
+  border-radius:2px; transition:transform .25s, opacity .25s;
+}
+.menu-toggle span{ top:50%; transform:translateY(-50%); }
+.menu-toggle::before{ top:4px; }
+.menu-toggle::after{ bottom:4px; }
+.menu-toggle.open span{ opacity:0; }
+.menu-toggle.open::before{ transform:translateY(10px) rotate(45deg); }
+.menu-toggle.open::after{ transform:translateY(-10px) rotate(-45deg); }
+
+/* 移动菜单面板 */
+.mobile-menu{
+  position:fixed; top:var(--header-h-mobile); left:0; right:0;
+  background:var(--bg); border-bottom:1px solid var(--divider);
+  display:none; flex-direction:column; gap:18px;
+  padding:16px 20px 22px; box-sizing:border-box; z-index:999;
+}
+.mobile-menu a{
+  text-decoration:none; color:#333;
+  font-family:'EuropaGrotesk', Arial, sans-serif;
+  font-weight:700; font-size:20px;
+}
+.mobile-menu.show{ display:flex; }
+
+/* 页面内容要让出 header 的高度（每页可覆盖） */
+main{ padding-top:calc(var(--header-h-desktop) + 18px); }
+
+/* 手机端 */
+@media (max-width:900px){
+  #main-header{ height:var(--header-h-mobile); padding:0 16px; }
+  .nav-desktop{ display:none; }
+  .menu-toggle{ display:block; }
+  main{ padding-top:calc(var(--header-h-mobile) + 18px); }
+}
