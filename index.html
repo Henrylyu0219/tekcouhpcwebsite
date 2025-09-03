@@ -1,137 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TekcoUHPC</title>
+  <link rel="stylesheet" href="/tekcouhpcwebsite/assets/header.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fdfcf8;
-      line-height: 1.6;
-    }
-
-    @font-face {
-      font-family: 'EuropaGrotesk';
-      src: url('fonts/europa-grotesk-sh-bold.otf') format('opentype');
-      font-weight: bold;
-      font-style: normal;
-    }
-
-    #main-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 70px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      background-color: #fdfcf8;
-      border-bottom: 1px solid #e0ded9;
-      transition: transform 0.3s ease;
-      z-index: 1000;
-    }
-
-    #main-header.hidden {
-      transform: translateY(-100%);
-    }
-
-    .left-section {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo img {
-      height: 40px;
-    }
-
-    .version {
-      font-size: 12px;
-      color: #aaa;
-      font-family: Arial, sans-serif;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #333;
-      font-family: 'EuropaGrotesk', Arial, sans-serif;
-      font-weight: bold;
-      font-size: 18px;
-      transition: color 0.3s;
-    }
-
-    nav ul li a:hover {
-      color: #1b2a82;
-    }
-
-    main {
-      padding-top: 90px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    body{ margin:0; background:#fdfcf8; font-family:Arial, sans-serif; line-height:1.6; }
+    main{ max-width:800px; margin:0 auto; padding:0 20px; }
+    h1{ font-family:'EuropaGrotesk', Arial, sans-serif; }
   </style>
 </head>
 <body>
 
+  <!-- 统一 Header -->
   <header id="main-header">
-    <div class="left-section">
-      <!-- 点击 logo 回主页（当前页，所以 # 或 index.html 都可以） -->
-      <a href="index.html" class="logo">
-        <img src="img/logo.png" alt="TekcoUHPC Logo">
+    <div class="header-left">
+      <a href="/tekcouhpcwebsite/index.html" class="logo" aria-label="Home">
+        <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC Logo">
       </a>
-      <span class="version">v0.0.9</span>
+      <span class="version">v0.1.0</span>
     </div>
-
-    <nav>
-      <ul>
-        <li><a href="#about">About Us</a></li>
-        <!-- Products 链接到 /products/ 页面 -->
-        <li><a href="products/">Products</a></li>
-        <li><a href="#contacts">Contacts</a></li>
-      </ul>
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+      <a href="/tekcouhpcwebsite/products/">Products</a>
+      <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
     </nav>
+    <button class="menu-toggle" aria-label="Open menu"><span></span></button>
   </header>
+
+  <!-- 移动端菜单 -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+    <a href="/tekcouhpcwebsite/products/">Products</a>
+    <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
+  </nav>
 
   <main>
     <h1 id="about">Welcome to TekcoUHPC</h1>
-    <p>
-      This is the homepage. Scroll down to see the header auto-hide feature.  
-      Click "Products" in the menu to go to the products page.
-    </p>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec dictum purus. Sed at ligula vel justo vulputate ullamcorper. Suspendisse potenti. Donec non ligula eget sapien malesuada commodo. Nam varius ipsum ac nunc faucibus, nec sollicitudin eros scelerisque.</p>
+    <p>This is the homepage. Scroll down to see the header auto-hide feature.</p>
     <p id="contacts">Contact section placeholder...</p>
   </main>
 
-  <script>
-    let lastScrollY = window.scrollY;
-    let header = document.getElementById("main-header");
-
-    window.addEventListener("scroll", () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY) {
-        header.classList.add("hidden");
-      } else {
-        if (lastScrollY - currentScrollY > 50) {
-          header.classList.remove("hidden");
-        }
-      }
-
-      lastScrollY = currentScrollY;
-    });
-  </script>
-
+  <script src="/tekcouhpcwebsite/assets/header.js"></script>
 </body>
 </html>
