@@ -32,7 +32,7 @@
       .hero-sub{ text-align:center; }
     }
 
-    /* Collections Grid */
+    /* Collections Grid (桌面/平板默认样式) */
     .collections{
       max-width:1300px; margin:60px auto; padding:0 24px;
       display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -42,11 +42,31 @@
     .collection-item img{
       width:100%; height:auto; border-radius:8px;
       box-shadow:0 2px 6px rgba(0,0,0,0.08); transition:transform .3s;
+      /* 保持方形 & 居中裁切，桌面端也更整齐；如不需要可删 */
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
     }
     .collection-item img:hover{ transform:scale(1.05); }
     .collection-item p{
       margin-top:2px; font-family:'NunitoSansLocal', Arial, sans-serif;
       font-size:14px; font-weight:500; color:#0a0a0a;
+      /* 左齐更贴合图片左边缘，2px 可在 0~4px 间微调 */
+      text-align:left; padding-left:2px;
+    }
+
+    /* —— 手机端：每行固定 2 个（不影响桌面） —— */
+    @media (max-width: 640px){
+      .collections{
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 两列均分 */
+        gap:20px;                                        /* 手机端行/列间距 */
+        padding: 0 16px;                                 /* 手机左右内边距更窄 */
+        margin: 32px auto;                               /* 更紧凑的上下间距 */
+      }
+      .collection-item p{
+        font-size:13px;      /* 手机标题稍小 */
+        margin-top:4px;      /* 更贴近图片 */
+        padding-left:2px;    /* 视觉左齐 */
+      }
     }
   </style>
 </head>
@@ -58,7 +78,7 @@
       <a href="/tekcouhpcwebsite/index.html" class="logo" aria-label="Home">
         <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC Logo">
       </a>
-      <span class="version">v0.1.2b</span>
+      <span class="version">v0.1.3</span>
     </div>
     <nav class="nav-desktop" aria-label="Primary">
       <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
