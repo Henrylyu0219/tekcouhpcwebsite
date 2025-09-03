@@ -4,213 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Products - TekcoUHPC</title>
-
-  <!-- 统一头部样式（沿用你项目里的） -->
-  <link rel="stylesheet" href="/tekcouhpcwebsite/assets/header.css" />
-
+  <link rel="stylesheet" href="/tekcouhpcwebsite/assets/header.css">
   <style>
-    :root{
-      --bg:#fdfcf8;
-      --ink:#0a0a0a;
-      --muted:#6b6b6b;
-      --divider:#e0ded9;
-      --page-max: 1200px;
-    }
+    body{ margin:0; background:#fdfcf8; font-family:Arial, sans-serif; line-height:1.6; }
 
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink)}
-    body{font-family: 'NunitoSansLocal', 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; line-height:1.6;}
-
-    /* 页面容器 */
-    .container{
-      max-width: var(--page-max);
-      margin: 0 auto;
-      padding: 24px 16px 56px;
-    }
-
-    /* 顶部 hero（可保留或按需删改，不影响 Collections） */
+    /* Hero */
     .hero{
-      display:grid; gap:24px; align-items:center;
-      grid-template-columns: 1fr;
-      margin-top: 12px;
+      max-width:1200px; margin:8vh auto; padding:0 24px;
+      display:grid; grid-template-columns:1fr 1.2fr; gap:48px; align-items:center;
     }
-    .hero h1{
-      font-family:'EuropaGrotesk', sans-serif;
-      font-weight:bold;
-      font-size: clamp(22px, 3.2vw, 36px);
-      margin:0 0 8px 0;
+    .hero-visual{ display:flex; justify-content:center; }
+    .hero-visual img{ width:min(380px,90%); height:auto; display:block; }
+    .hero-text{ text-align:left; }
+    .hero-title{
+      font-family:'EuropaGrotesk', Arial, sans-serif;
+      font-weight:700; line-height:.9; color:#0a0a0a;
+      font-size:clamp(48px, 8vw, 140px); margin:0 0 18px 0;
     }
-    .hero p{ margin:0; color:var(--muted); }
+    .hero-sub{
+      font-family:'NunitoSansLocal', Arial, sans-serif;
+      font-size:clamp(14px, 2.2vw, 20px); color:#6b6b6b; margin:0; text-align:left;
+    }
+    @media (max-width:900px){
+      .hero{ grid-template-columns:1fr; gap:28px; margin:6vh auto; }
+      .hero-visual img{ width:min(420px,75%); }
+      .hero-text{ text-align:center; }
+      .hero-sub{ text-align:center; }
+    }
 
-    @media (min-width: 900px){
-      .hero{ grid-template-columns: 1.1fr 1fr; }
-    }
-
-    /* —— Collections —— */
+    /* Collections Grid */
     .collections{
-      margin-top: 32px;
+      max-width:1300px; margin:60px auto; padding:0 24px;
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap:32px;
     }
-    .collections h2{
-      font-family:'EuropaGrotesk', sans-serif; font-weight:bold;
-      font-size: clamp(18px, 2.4vw, 28px);
-      margin: 0 0 16px 0;
+    .collection-item{ text-align:center; }
+    .collection-item img{
+      width:100%; height:auto; border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08); transition:transform .3s;
     }
-
-    /* 网格：不改行距（gap保持为 28px，如需严格沿用你之前的值，改这里即可） */
-    .collections-grid{
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 28px; /* ← 保持行间距不变 */
+    .collection-item img:hover{ transform:scale(1.05); }
+    .collection-item p{
+      margin-top:12px; font-family:'NunitoSansLocal', Arial, sans-serif;
+      font-size:16px; font-weight:500; color:#0a0a0a;
     }
-
-    /* 卡片 */
-    .collection-card{
-      display:flex;
-      flex-direction:column;
-    }
-
-    .collection-thumb{
-      display:block;
-      width:100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 18px;
-      box-shadow: 0 2px 24px rgba(0,0,0,.06);
-      background:#fff;
-    }
-
-    /* 关键：名称左对齐，并更靠近图片底边；不影响网格 gap */
-    .collection-name{
-      margin-top: 6px;          /* ← 靠近图片：你可以改为 4px/8px 微调 */
-      margin-bottom: 0;
-      padding-left: 2px;        /* 视觉与图片左边缘齐 */
-      text-align: left;         /* 左对齐 */
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 1.4;
-      color: var(--ink);
-    }
-
-    /* 若父级曾设 text-align:center，可取消其影响 */
-    /* .collection-name{ text-align:left !important; } */
   </style>
 </head>
 <body>
 
-  <!-- 统一头部（来自 header.css / header.js） -->
-  <header class="site-header">
-    <a class="logo" href="/tekcouhpcwebsite/">
-      <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC" />
-    </a>
-
-    <nav class="header__nav-desktop">
-      <a href="/tekcouhpcwebsite/#about">About</a>
-      <a href="/tekcouhpcwebsite/products/">Products</a>
-      <a href="/tekcouhpcwebsite/#contacts">Contacts</a>
+  <!-- 统一 Header -->
+  <header id="main-header">
+    <div class="header-left">
+      <a href="/tekcouhpcwebsite/index.html" class="logo" aria-label="Home">
+        <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC Logo">
+      </a>
+      <span class="version">v1.0.0</span>
+    </div>
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+      <a href="/tekcouhpcwebsite/products/" class="active">Products</a>
+      <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
     </nav>
-
-    <button class="header__hamburger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="mobile-menu">
-      <a href="/tekcouhpcwebsite/#about">About</a>
-      <a href="/tekcouhpcwebsite/products/">Products</a>
-      <a href="/tekcouhpcwebsite/#contacts">Contacts</a>
-    </nav>
+    <button class="menu-toggle" aria-label="Open menu"><span></span></button>
   </header>
 
-  <main class="container">
+  <!-- 移动端菜单 -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+    <a href="/tekcouhpcwebsite/products/">Products</a>
+    <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
+  </nav>
+
+  <main>
+    <!-- Hero -->
     <section class="hero">
-      <div>
-        <h1>Collections</h1>
-        <p>Explore our UHPC textures and finishes designed for modern interiors.</p>
+      <div class="hero-visual">
+        <img src="/tekcouhpcwebsite/img/ConcreteTitle72pp.png" alt="Concrete sample" />
+      </div>
+      <div class="hero-text">
+        <h1 class="hero-title">Our<br/>Products</h1>
+        <p class="hero-sub">An elegant introduction of our concrete product collections.</p>
       </div>
     </section>
 
-    <section class="collections" id="collections">
-      <h2>All Collections</h2>
-
-      <div class="collections-grid">
-        <!-- 一卡一图：文件名为两个单词连写，如 RawGrey.png -->
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Travertine.png" alt="Travertine">
-          <figcaption class="collection-name">Travertine</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Damascus.png" alt="Damascus">
-          <figcaption class="collection-name">Damascus</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/BushHammered.png" alt="Bush Hammered">
-          <figcaption class="collection-name">Bush Hammered</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Taklamar.png" alt="Taklamar">
-          <figcaption class="collection-name">Taklamar</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/RawGrey.png" alt="Raw Grey">
-          <figcaption class="collection-name">Raw Grey</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/PrimeRaw.png" alt="Prime Raw">
-          <figcaption class="collection-name">Prime Raw</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/RawArchi.png" alt="Raw Archi">
-          <figcaption class="collection-name">Raw Archi</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Artisanal.png" alt="Artisanal">
-          <figcaption class="collection-name">Artisanal</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Wood.png" alt="Wood">
-          <figcaption class="collection-name">Wood</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/PatchWood.png" alt="Patch Wood">
-          <figcaption class="collection-name">Patch Wood</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Nature.png" alt="Nature">
-          <figcaption class="collection-name">Nature</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Colour.png" alt="Colour">
-          <figcaption class="collection-name">Colour</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Earth.png" alt="Earth">
-          <figcaption class="collection-name">Earth</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Cloud.png" alt="Cloud">
-          <figcaption class="collection-name">Cloud</figcaption>
-        </figure>
-
-        <figure class="collection-card">
-          <img class="collection-thumb" loading="lazy" src="/tekcouhpcwebsite/img/ProductsCover/Knit.png" alt="Knit">
-          <figcaption class="collection-name">Knit</figcaption>
-        </figure>
-      </div>
+    <!-- Collections Grid -->
+    <section class="collections">
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Travertine.png" alt="Travertine"><p>Travertine</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Damascus.png" alt="Damascus"><p>Damascus</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/BushHammered.png" alt="Bush Hammered"><p>Bush Hammered</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Taklamar.png" alt="Taklamar"><p>Taklamar</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/RawGrey.png" alt="Raw Grey"><p>Raw Grey</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/PrimeRaw.png" alt="Prime Raw"><p>Prime Raw</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/RawArchi.png" alt="Raw Archi"><p>Raw Archi</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Artisanal.png" alt="Artisanal"><p>Artisanal</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Wood.png" alt="Wood"><p>Wood</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/PatchWood.png" alt="Patch Wood"><p>Patch Wood</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Nature.png" alt="Nature"><p>Nature</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Colour.png" alt="Colour"><p>Colour</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Earth.png" alt="Earth"><p>Earth</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Cloud.png" alt="Cloud"><p>Cloud</p></div>
+      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Knit.png" alt="Knit"><p>Knit</p></div>
     </section>
   </main>
 
-  <!-- 头部交互 -->
   <script src="/tekcouhpcwebsite/assets/header.js"></script>
 </body>
 </html>
