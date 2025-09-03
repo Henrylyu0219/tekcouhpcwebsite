@@ -1,295 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TekcoUHPC — The Concrete Revolution</title>
-  <!-- Fonts (Europa via Typekit) -->
-  <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css">
-  <!-- Use the same header styles as products -->
-  <link rel="stylesheet" href="assets/header.css">
+  <title>TekcoUHPC</title>
+  <link rel="stylesheet" href="/tekcouhpcwebsite/assets/header.css">
   <style>
-    :root{
-      /* === Carousel quick knobs === */
-      --ringW: 220px;   /* card width */
-      --ringH: 260px;   /* card height */
-      --persp: 1100px;  /* perspective depth */
-      --cardRadius: 24px;
-      --edgeFade: 220px;
-      --ringAxisY: -20px; /* shift rotation axis up/down (negative = up) */
-      /* ================================= */
-      --bg:#fdfcf8; --ink:#0a0a0a; --muted:#6b6b6b;
-    }
-    html,body{margin:0;padding:0;background:var(--bg); color:var(--ink)}
-    body{font-family: Nunito, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6}
-    a{color:inherit;text-decoration:none}
-
-    /* Header container (header.js renders here; styles from assets/header.css) */
-    <style>
-    </style>
-    header#site-header{position:sticky;top:0;z-index:50;background:var(--bg)}
-
-    /* HERO */
-    .hero{max-width:1200px;margin:56px auto 8px;padding:0 20px;display:grid;grid-template-columns:1fr;row-gap:8px;text-align:left}
-    .hero .line-top{font-family:'EuropaGrotesk', system-ui, Arial; font-size:clamp(16px,2.2vw,20px); opacity:.75}
-    .hero .line-mid{font-family:'EuropaGrotesk', system-ui, Arial; font-weight:700;
-      font-size:clamp(40px,7vw,72px); line-height:1.05; letter-spacing:.2px}
-    .hero .line-bot{font-family:'EuropaGrotesk', system-ui, Arial; font-size:clamp(14px,2vw,18px); opacity:.85}
-    .cta{display:inline-block;margin-top:10px;padding:10px 16px;border:1px solid #ddd;border-radius:14px;
-      background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.06);}
-    .cta:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(0,0,0,.08)}
-
-    /* SECTION TITLE */
-    .ring-wrap{max-width:1200px;margin:22px auto 18px;padding:0 20px}
-    .ring-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-    .ring-title{font-family:'EuropaGrotesk', system-ui, Arial; font-size: clamp(22px, 3vw, 30px); margin:0}
-    .ring-ctrl{display:flex;gap:10px}
-    .ring-btn{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:12px;
-      cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.06);transition:.2s}
-    .ring-btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,0,0,.08)}
-
-    /* VIEWPORT with perspective */
-    .ring-viewport{
-      position:relative; height: clamp(300px, 36vw, 420px);
-      perspective: var(--persp); perspective-origin: 50% 50%;
-      margin: 8px auto 6px; overflow: visible;
-    }
-    .ring-viewport::before, .ring-viewport::after{
-      content:""; position:absolute; top:0; bottom:0; width:var(--edgeFade); pointer-events:none;
-    }
-    .ring-viewport::before{left:-2px;background:linear-gradient(to right,var(--bg),rgba(253,252,248,0) 70%)}
-    .ring-viewport::after{right:-2px;background:linear-gradient(to left,var(--bg),rgba(253,252,248,0) 70%)}
-
-    .ring-scene{
-      width:100%;height:100%;position:relative;transform-style: preserve-3d;
-      will-change: transform;
-      transform: translateY(var(--ringAxisY)); /* shift the rotation axis */
-    }
-    .ring-card{
-      position:absolute; top:50%; left:50%;
-      width: var(--ringW); height: var(--ringH);
-      transform-style: preserve-3d; backface-visibility: hidden;
-      border-radius: var(--cardRadius);
-      box-shadow:0 14px 40px rgba(0,0,0,.12);
-      overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end;
-      color:#fff; transition:filter .2s, transform .2s;
-      background: linear-gradient(135deg,#8e8e8e,#3a3a3a);
-    }
-    .ring-card .ph{position:absolute; inset:0; width:100%; height:100%; object-fit: cover; filter: saturate(1.02) contrast(1.05) brightness(.98);}
-    .ring-card::after{content:""; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0) 60%);}
-    .ring-card .meta{position:relative; z-index:2; padding:12px 14px 14px;}
-    .ring-card h4{margin:0; font-size:16px; font-weight:700; font-family:'EuropaGrotesk', system-ui, Arial; letter-spacing:.2px;}
-    .ring-card p{display:none}
-
-    .ring-caption{
-      text-align:center; font-family:'EuropaGrotesk', system-ui, Arial; font-size: clamp(16px, 2.2vw, 20px);
-      font-weight:700; letter-spacing:.2px; color: var(--ink); margin: 4px 0 2px;
-    }
-
-    footer{border-top:1px solid #eae7e0;margin-top:20px;padding:18px 20px;color:#777;text-align:center;font-size:13px}
-
-    @media (max-width: 1024px){
-      :root{ --ringW: 200px; --ringH: 240px; --persp: 950px; --edgeFade: 160px; }
-    }
-    @media (max-width: 768px){
-      :root{ --ringW: 72vw; --ringH: 56vw; --persp: 820px; --edgeFade: 120px; }
-      .hero{margin-top:44px}
-    }
+    body{ margin:0; background:#fdfcf8; font-family:Arial, sans-serif; line-height:1.6; }
+    main{ max-width:800px; margin:0 auto; padding:0 20px; }
+    h1{ font-family:'EuropaGrotesk', Arial, sans-serif; }
   </style>
 </head>
 <body>
-  <header id="site-header"></header>
+
+  <!-- 统一 Header -->
+  <header id="main-header">
+    <div class="header-left">
+      <a href="/tekcouhpcwebsite/index.html" class="logo" aria-label="Home">
+        <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC Logo">
+      </a>
+      <span class="version">v0.1.1</span>
+    </div>
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+      <a href="/tekcouhpcwebsite/products/">Products</a>
+      <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open menu"><span></span></button>
+  </header>
+
+  <!-- 移动端菜单 -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
+    <a href="/tekcouhpcwebsite/products/">Products</a>
+    <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
+  </nav>
 
   <main>
-    <!-- EUROPA text composition -->
-    <section class="hero" id="about">
-      <div class="line-top">See TekcoUHPC how to make</div>
-      <h1 class="line-mid">The Concrete Revolution</h1>
-      <div class="line-bot">Forerunner in decorative concrete in Singapore</div>
-      <a class="cta" href="products/">Explore Collections</a>
-    </section>
-
-    <!-- Ring Carousel -->
-    <section class="ring-wrap" id="showcase">
-      <div class="ring-head">
-        <h2 class="ring-title">Collections Showcase</h2>
-        <div class="ring-ctrl">
-          <button class="ring-btn" id="ringPrev" aria-label="Previous">&#9664;</button>
-          <button class="ring-btn" id="ringNext" aria-label="Next">&#9654;</button>
-        </div>
-      </div>
-      <div class="ring-viewport">
-        <div class="ring-scene" id="ringScene" aria-live="polite"></div>
-      </div>
-      <div class="ring-caption" id="ringCaption">Loading…</div>
-    </section>
+    <h1 id="about">Welcome to TekcoUHPC</h1>
+    <p>This is the homepage. Scroll down to see the header auto-hide feature.</p>
+    <p id="contacts">Contact section placeholder...</p>
   </main>
 
-  <footer>© TekcoUHPC. All rights reserved.</footer>
-
-  <!-- Carousel script -->
-  <script>
-  (function(){
-    /* === knobs you can tweak === */
-    var CONCAVE = true;          // true = concave (凹进), false = convex
-    var RADIUS_SCALE = 1.6;      // >1 = larger ring & spacing
-    var EMPHASIZE_MAX = 0.02;    // subtle scale on front card
-    var AUTO_SPEED = 0.0;        // 0 = stop auto-rotate (let user swipe both ways)
-    /* ========================== */
-
-    var items = [
-      ["Travertine","./img/ProductsCover/Travertine.png"],
-      ["Damascus","./img/ProductsCover/Damascus.png"],
-      ["Bush Hammered","./img/ProductsCover/BushHammered.png"],
-      ["Taklamar","./img/ProductsCover/Taklamar.png"],
-      ["Raw Grey","./img/ProductsCover/RawGrey.png"],
-      ["Prime Raw","./img/ProductsCover/PrimeRaw.png"],
-      ["Raw Archi","./img/ProductsCover/RawArchi.png"],
-      ["Artisanal","./img/ProductsCover/Artisanal.png"],
-      ["Wood","./img/ProductsCover/Wood.png"],
-      ["Patch Wood","./img/ProductsCover/PatchWood.png"],
-      ["Nature","./img/ProductsCover/Nature.png"],
-      ["Colour","./img/ProductsCover/Colour.png"],
-      ["Earth","./img/ProductsCover/Earth.png"],
-      ["Cloud","./img/ProductsCover/Cloud.png"],
-      ["Knit","./img/ProductsCover/Knit.png"]
-    ];
-
-    var scene = document.getElementById('ringScene');
-    var btnPrev = document.getElementById('ringPrev');
-    var btnNext = document.getElementById('ringNext');
-    var caption = document.getElementById('ringCaption');
-
-    // Build cards
-    for (var i=0;i<items.length;i++){
-      var name = items[i][0]; var src = items[i][1];
-      var card = document.createElement('figure');
-      card.className = 'ring-card';
-      card.innerHTML = '' +
-        '<img class="ph" alt="' + name + '" src="' + src + '" onerror="this.style.display=\'none\'">' +
-        '<figcaption class="meta"><h4>' + name + '</h4></figcaption>';
-      scene.appendChild(card);
-    }
-
-    var cards = Array.prototype.slice.call(scene.children);
-    var n = cards.length;
-    var angleStep = 360 / n;
-    var radius = 520;
-    var current = 0;
-    var auto = AUTO_SPEED !== 0;
-
-    function baseTransform(i){
-      var a = i * angleStep;
-      if(CONCAVE){
-        return 'translate3d(-50%,-50%,0) rotateY(' + a + 'deg) translateZ(' + (-radius) + 'px) rotateY(180deg)';
-      } else {
-        return 'translate3d(-50%,-50%,0) rotateY(' + a + 'deg) translateZ(' + radius + 'px)';
-      }
-    }
-
-    function layout(){
-      var rect = cards[0].getBoundingClientRect();
-      var cardW = rect.width || 220;
-      var theta = Math.PI * 2 / n;
-      radius = Math.max( (cardW/2) / Math.sin(theta/2) + 40, 280 );
-      radius *= RADIUS_SCALE;
-      for (var i=0;i<n;i++){
-        cards[i].style.transform = baseTransform(i);
-      }
-      applyRotation(true);
-    }
-
-    function getActiveIndex(){
-      var norm = ((current % 360) + 360) % 360;
-      var bestI = 0, bestDiff = 1e9;
-      for (var i=0;i<n;i++){
-        var a = (i * angleStep + norm) % 360;
-        var d = Math.min(a, 360 - a);
-        if(d < bestDiff){ bestDiff = d; bestI = i; }
-      }
-      return bestI;
-    }
-
-    var lastActive = -1;
-    function updateCaption(){
-      var idx = getActiveIndex();
-      if(idx === lastActive) return;
-      caption.textContent = items[idx][0];
-      if(lastActive >= 0) cards[lastActive].style.filter = '';
-      cards[idx].style.filter = 'brightness(1.08)';
-      lastActive = idx;
-    }
-
-    function emphasize(){
-      var norm = ((current % 360) + 360) % 360;
-      for (var i=0;i<n;i++){
-        var a = (i * angleStep + norm) % 360;
-        var dist = Math.min(a, 360 - a);
-        var t = 1 - Math.min(dist/120, 1);
-        var scale = 1 + t * EMPHASIZE_MAX;
-        cards[i].style.transform = baseTransform(i) + ' scale(' + scale + ')';
-        cards[i].style.zIndex = 100 + Math.round(t*100);
-        cards[i].style.opacity = 0.8 + t*0.2;
-      }
-    }
-
-    function applyRotation(force){
-      scene.style.transform = 'translateY(var(--ringAxisY)) rotateY(' + current + 'deg)';
-      if(force) updateCaption();
-      emphasize();
-    }
-
-    function tick(){
-      if(auto) current -= AUTO_SPEED;
-      applyRotation(false);
-      if((Date.now()|0) % 4 === 0) updateCaption();
-      requestAnimationFrame(tick);
-    }
-
-    // Bidirectional drag/swipe
-    var dragging = false, startX = 0, startAngle = 0;
-    function dragStart(x){ dragging = true; startX = x; startAngle = current; auto = false; }
-    function dragMove(x){
-      if(!dragging) return;
-      var dx = x - startX;
-      current = startAngle - dx * 0.35; // negative so right-swipe -> 向右旋转（更自然）
-      applyRotation(false);
-      updateCaption();
-    }
-    function dragEnd(){ dragging = false; auto = AUTO_SPEED !== 0; }
-
-    scene.addEventListener('pointerdown', function(e){ if(scene.setPointerCapture) scene.setPointerCapture(e.pointerId); dragStart(e.clientX); });
-    window.addEventListener('pointermove', function(e){ dragMove(e.clientX); });
-    window.addEventListener('pointerup', dragEnd);
-    scene.addEventListener('touchstart', function(e){ dragStart(e.touches[0].clientX); }, {passive:true});
-    window.addEventListener('touchmove',  function(e){ dragMove(e.touches[0].clientX); }, {passive:true});
-    window.addEventListener('touchend',   dragEnd);
-
-    // Wheel both directions
-    scene.addEventListener('wheel', function(e){
-      e.preventDefault();
-      // deltaY>0 -> 向左；deltaY<0 -> 向右
-      current += e.deltaY * 0.2;
-      applyRotation(false);
-      updateCaption();
-    }, {passive:false});
-
-    // Buttons + keyboard
-    btnPrev && btnPrev.addEventListener('click', function(){ current += angleStep; applyRotation(true); });
-    btnNext && btnNext.addEventListener('click', function(){ current -= angleStep; applyRotation(true); });
-    window.addEventListener('keydown', function(e){
-      if(e.key === 'ArrowLeft'){ current += angleStep; applyRotation(true); }
-      if(e.key === 'ArrowRight'){ current -= angleStep; applyRotation(true); }
-    });
-
-    window.addEventListener('resize', layout);
-    layout();
-    updateCaption();
-    tick();
-  })();
-  </script>
-
-  <!-- Project header script: same as products -->
-  <script src="assets/header.js" defer></script>
+  <script src="/tekcouhpcwebsite/assets/header.js"></script>
 </body>
 </html>
