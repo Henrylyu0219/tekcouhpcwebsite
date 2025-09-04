@@ -13,7 +13,7 @@
   filter: none;
 }
 
-/* 标签跟随父级 tile 一起淡入（避免先显示文本） */
+/* 标签跟随父级一起淡入（避免先显示文本） */
 .fx-softload .tile .tile__label{
   opacity: 0;
   transform: translateY(4px);
@@ -27,7 +27,6 @@
 /* —— Skeleton：图片加载前的柔和“渐变骨架” —— */
 .fx-softload .tile__figure{
   position: relative;
-  background: #f2efe8;         /* 温和底色，避免空白闪烁 */
   overflow: hidden;
 }
 .fx-softload .tile__figure::after{
@@ -42,12 +41,11 @@
   pointer-events: none;
 }
 
-/* 图片本身先透明，加载完再淡入 */
+/* 图片先透明，加载完再淡入 */
 .fx-softload .tile__figure img{
   opacity: 0;
   transition: opacity .5s ease;
 }
-/* 当图片加载完成，关闭骨架并显示图片 */
 .fx-softload .tile__figure.is-loaded::after{
   animation: none;
   opacity: 0;
