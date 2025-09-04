@@ -1,0 +1,77 @@
+/* —— Soft Load：卡片与标签的柔和浮现 —— */
+.fx-softload .tile{
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(6px) saturate(90%) contrast(95%);
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease;
+  transition-delay: var(--delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+.fx-softload .tile.is-visible{
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* 标签跟随父级 tile 一起淡入（避免先显示文本） */
+.fx-softload .tile .tile__label{
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .6s ease .12s, transform .6s ease .12s;
+}
+.fx-softload .tile.is-visible .tile__label{
+  opacity: 1;
+  transform: none;
+}
+
+/* —— Skeleton：图片加载前的柔和“渐变骨架” —— */
+.fx-softload .tile__figure{
+  position: relative;
+  background: #f2efe8;         /* 温和底色，避免空白闪烁 */
+  overflow: hidden;
+}
+.fx-softload .tile__figure::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.60) 45%,
+    rgba(255,255,255,0) 100%);
+  animation: tk-shimmer 1.2s ease-in-out infinite;
+  opacity: .55;
+  pointer-events: none;
+}
+
+/* 图片本身先透明，加载完再淡入 */
+.fx-softload .tile__figure img{
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+/* 当图片加载完成，关闭骨架并显示图片 */
+.fx-softload .tile__figure.is-loaded::after{
+  animation: none;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.fx-softload .tile__figure.is-loaded img{
+  opacity: 1;
+}
+
+@keyframes tk-shimmer{
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 无障碍：用户偏好减少动画则关闭动效 */
+@media (prefers-reduced-motion: reduce){
+  .fx-softload .tile,
+  .fx-softload .tile .tile__label,
+  .fx-softload .tile__figure::after,
+  .fx-softload .tile__figure img{
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
