@@ -1,4 +1,4 @@
-<!-- version 0.2.3-->
+<!-- products page version 0.2.5 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +11,30 @@
   <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- 用相对路径，避免子目录部署导致 404 -->
-  <link rel="stylesheet" href="../assets/header.css" />
-  <link rel="stylesheet" href="../assets/softload.css" />
+  <!-- 自动识别 GitHub Pages 项目根 -->
+  <script>
+    window.__BASE__ = (function () {
+      const seg = location.pathname.split('/').filter(Boolean);
+      if (location.host.endsWith('github.io') && seg.length > 0) {
+        return '/' + seg[0];
+      }
+      return '';
+    })();
+  </script>
+
+  <!-- 注入 header.css 和 softload.css -->
+  <script>
+    (function(BASE){
+      function link(href){
+        var l=document.createElement('link');
+        l.rel='stylesheet';
+        l.href=BASE+href;
+        document.head.appendChild(l);
+      }
+      link('/assets/header.css');
+      link('/assets/softload.css');
+    })(window.__BASE__);
+  </script>
 
   <style>
     :root{ --bg:#fdfcf8; --ink:#0b0b0b; --muted:#6b6b6b; }
@@ -24,7 +45,6 @@
     .hero__kicker{margin:0;font-family:"europa","EuropaGrotesk","Nunito",Arial,sans-serif;font-weight:800;letter-spacing:-.01em;font-size:clamp(28px,3.5vw,44px)}
     .hero__sub{margin:12px 0 0;color:var(--muted);font-weight:400;font-size:clamp(14px,2.2vw,16px)}
 
-    /* 下面不改你原来的 tile 尺寸/间距，只提供必要的基础样式 */
     .catalog{max-width:1240px;margin:24px auto 96px;padding:0 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 28px}
     @media (min-width:1400px){.catalog{max-width:1380px;grid-template-columns:repeat(4,minmax(0,1fr))}}
     @media (max-width:960px){.catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 20px}}
@@ -41,14 +61,14 @@
   <!-- Header -->
   <header class="tk-header">
     <div class="tk-header__inner">
-      <a class="tk-logo" href="../index.html" aria-label="TekcoUHPC Home">
-        <img src="../assets/logo.svg" alt="TekcoUHPC" />
+      <a class="tk-logo" id="homeLink" aria-label="TekcoUHPC Home">
+        <img id="logoImg" alt="TekcoUHPC" />
       </a>
 
       <nav class="tk-nav tk-nav--desktop">
-        <a href="../index.html">Home</a>
-        <a class="is-active" href="./index.html">Products</a>
-        <a href="../contact/index.html">Contact</a>
+        <a id="navHome">Home</a>
+        <a class="is-active" id="navProducts">Products</a>
+        <a id="navContact">Contact</a>
       </nav>
 
       <button class="tk-burger" aria-label="Open Menu" aria-expanded="false">
@@ -57,9 +77,9 @@
     </div>
 
     <nav class="tk-nav tk-nav--mobile" hidden>
-      <a href="../index.html">Home</a>
-      <a class="is-active" href="./index.html">Products</a>
-      <a href="../contact/index.html">Contact</a>
+      <a id="mnavHome">Home</a>
+      <a class="is-active" id="mnavProducts">Products</a>
+      <a id="mnavContact">Contact</a>
     </nav>
   </header>
 
@@ -69,39 +89,56 @@
       <p class="hero__sub">Curated UHPC surfaces and textures for architecture &amp; interiors</p>
     </section>
 
-    <!-- 动态渲染容器 -->
     <section class="catalog fx-softload" id="catalog"></section>
   </main>
 
-  <!-- 相对路径加载脚本 -->
-  <script src="../assets/header.js"></script>
-  <script src="../assets/softload.js"></script>
+  <!-- 注入 header.js 和 softload.js -->
+  <script>
+    (function(BASE){
+      function js(src){
+        var s=document.createElement('script');
+        s.src=BASE+src;
+        document.body.appendChild(s);
+      }
+      js('/assets/header.js');
+      js('/assets/softload.js');
+    })(window.__BASE__);
+  </script>
 
-  <!-- 渲染逻辑：相对路径读取 JSON -->
+  <!-- 渲染逻辑 -->
   <script type="module">
+    const BASE = window.__BASE__ || '';
+
+    // 修正 header logo 与导航
+    document.getElementById('homeLink').href = BASE + '/index.html';
+    document.getElementById('logoImg').src   = BASE + '/assets/logo.svg';
+    document.getElementById('navHome').href  = BASE + '/index.html';
+    document.getElementById('navProducts').href = BASE + '/products/index.html';
+    document.getElementById('navContact').href  = BASE + '/contact/index.html';
+    document.getElementById('mnavHome').href = BASE + '/index.html';
+    document.getElementById('mnavProducts').href = BASE + '/products/index.html';
+    document.getElementById('mnavContact').href  = BASE + '/contact/index.html';
+
     async function renderCatalog(){
       try{
-        const res = await fetch('../assets/products.json', { cache: 'no-cache' });
-        if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+        const res = await fetch(BASE + '/assets/products.json', { cache: 'no-cache' });
+        if(!res.ok) throw new Error(res.status);
         const items = await res.json();
 
-        const IMG_DIR = '../img/ProductsCover/';
         const html = items.map(({name, slug, img}) => `
           <a class="tile" href="./${slug}.html">
             <figure class="tile__figure">
-              <img loading="lazy" src="${IMG_DIR}${img}" alt="${name}" />
+              <img loading="lazy" src="${BASE}/img/ProductsCover/${img}" alt="${name}" />
               <figcaption class="tile__label">${name}</figcaption>
             </figure>
           </a>
         `).join('');
 
-        const el = document.getElementById('catalog');
-        el.innerHTML = html;
-        if (window.tkSoftloadInit) window.tkSoftloadInit(el);
+        document.getElementById('catalog').innerHTML = html;
+        if (window.tkSoftloadInit) window.tkSoftloadInit(document);
       }catch(err){
-        console.error('Failed to load products.json:', err);
-        document.getElementById('catalog').innerHTML =
-          '<p style="color:#888">Failed to load products.</p>';
+        console.error(err);
+        document.getElementById('catalog').innerHTML = '<p style="color:#888">Failed to load products.</p>';
       }
     }
     renderCatalog();
