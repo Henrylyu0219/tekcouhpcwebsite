@@ -1,0 +1,17 @@
+[
+  { "name": "Travertine",     "slug": "travertine",     "img": "Travertine.png" },
+  { "name": "Damascus",       "slug": "damascus",       "img": "Damascus.png" },
+  { "name": "Bush Hammered",  "slug": "bush-hammered",  "img": "BushHammered.png" },
+  { "name": "Taklamar",       "slug": "taklamar",       "img": "Taklamar.png" },
+  { "name": "Raw Grey",       "slug": "raw-grey",       "img": "RawGrey.png" },
+  { "name": "Prime Raw",      "slug": "prime-raw",      "img": "PrimeRaw.png" },
+  { "name": "Raw Archi",      "slug": "raw-archi",      "img": "RawArchi.png" },
+  { "name": "Artisanal",      "slug": "artisanal",      "img": "Artisanal.png" },
+  { "name": "Wood",           "slug": "wood",           "img": "Wood.png" },
+  { "name": "Patch Wood",     "slug": "patch-wood",     "img": "PatchWood.png" },
+  { "name": "Nature",         "slug": "nature",         "img": "Nature.png" },
+  { "name": "Colour",         "slug": "colour",         "img": "Colour.png" },
+  { "name": "Earth",          "slug": "earth",          "img": "Earth.png" },
+  { "name": "Cloud",          "slug": "cloud",          "img": "Cloud.png" },
+  { "name": "Knit",           "slug": "knit",           "img": "Knit.png" }
+]
