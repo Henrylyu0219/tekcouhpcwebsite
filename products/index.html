@@ -5,131 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Products - TekcoUHPC</title>
 
-  <!-- Adobe Fonts: Europa -->
-  <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css"><!-- Europa via Typekit -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- 统一头部样式 -->
-  <link rel="stylesheet" href="/tekcouhpcwebsite/assets/header.css">
-
-  <style>
-    body{ margin:0; background:#fdfcf8; font-family:Arial, sans-serif; line-height:1.6; }
-
-    /* Hero */
-    .hero{
-      max-width:1200px; margin:8vh auto; padding:0 24px;
-      display:grid; grid-template-columns:1fr 1.2fr; gap:48px; align-items:center;
-    }
-    .hero-visual{ display:flex; justify-content:center; }
-    .hero-visual img{ width:min(380px,90%); height:auto; display:block; }
-
-    .hero-title{
-      font-family:"europa", sans-serif; /* Europa Bold */
-      font-weight:700;
-      line-height:.9; color:#0a0a0a;
-      font-size:clamp(48px, 8vw, 140px);
-      margin:0 0 18px 0;
-    }
-    .hero-sub{
-      font-family:"europa", sans-serif; /* Europa Light */
-      font-weight:300;
-      font-size:clamp(14px, 2.2vw, 20px);
-      color:#6b6b6b; margin:0; text-align:left;
-    }
-    @media (max-width:900px){
-      .hero{ grid-template-columns:1fr; gap:28px; margin:6vh auto; }
-      .hero-visual img{ width:min(420px,75%); }
-      .hero-sub{ text-align:center; }
-      .hero-title{ text-align:center; }
-    }
-
-    /* Collections Grid （桌面/平板默认） */
-    .collections{
-      max-width:1300px; margin:60px auto; padding:0 24px;
-      display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap:32px;
-    }
-    .collection-item{ text-align:left; }
-    .collection-item img{
-      width:100%; height:auto; border-radius:8px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.08); transition:transform .3s;
-      aspect-ratio:1/1; object-fit:cover;
-    }
-    .collection-item img:hover{ transform:scale(1.05); }
-    .collection-item p{
-      margin-top:2px;
-      font-family:"europa", sans-serif; /* Europa Regular */
-      font-weight:400;
-      font-size:14px; color:#0a0a0a;
-      text-align:left; padding-left:2px;
-    }
-
-    /* 手机端：固定两列，不影响桌面 */
-    @media (max-width:640px){
-      .collections{
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap:20px; padding:0 16px; margin:32px auto;
-      }
-      .collection-item p{ font-size:13px; margin-top:4px; }
-    }
-  </style>
+  <!-- Base & Header CSS -->
+  <link rel="stylesheet" href="../assets/header.css" />
+  <!-- Products CSS -->
+  <link rel="stylesheet" href="../assets/products.css" />
 </head>
 <body>
-
   <!-- Header -->
-  <header id="main-header">
-    <div class="header-left">
-      <a href="/tekcouhpcwebsite/index.html" class="logo" aria-label="Home">
-        <img src="/tekcouhpcwebsite/img/logo.png" alt="TekcoUHPC Logo">
+  <header class="tk-header">
+    <div class="tk-header__inner">
+      <a class="tk-logo" href="../index.html" aria-label="TekcoUHPC Home">
+        <img src="../assets/logo.svg" alt="TekcoUHPC" />
       </a>
-      <span class="version">v0.1.4</span>
+
+      <nav class="tk-nav tk-nav--desktop">
+        <a href="../index.html">Home</a>
+        <a class="is-active" href="./index.html">Products</a>
+        <a href="../contact/index.html">Contact</a>
+      </nav>
+
+      <button class="tk-burger" aria-label="Open Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <nav class="nav-desktop" aria-label="Primary">
-      <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
-      <a href="/tekcouhpcwebsite/products/" class="active">Products</a>
-      <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
+
+    <nav class="tk-nav tk-nav--mobile" hidden>
+      <a href="../index.html">Home</a>
+      <a class="is-active" href="./index.html">Products</a>
+      <a href="../contact/index.html">Contact</a>
     </nav>
-    <button class="menu-toggle" aria-label="Open menu"><span></span></button>
   </header>
 
-  <!-- 移动端菜单 -->
-  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="/tekcouhpcwebsite/index.html#about">About Us</a>
-    <a href="/tekcouhpcwebsite/products/">Products</a>
-    <a href="/tekcouhpcwebsite/index.html#contacts">Contacts</a>
-  </nav>
-
-  <main>
-    <!-- Hero -->
+  <main class="page-products">
     <section class="hero">
-      <div class="hero-visual">
-        <img src="/tekcouhpcwebsite/img/ConcreteTitle72pp.png" alt="Concrete sample" />
-      </div>
-      <div class="hero-text">
-        <h1 class="hero-title">Our<br/>Products</h1>
-        <p class="hero-sub">An elegant introduction of our concrete product collections.</p>
-      </div>
+      <h1 class="hero__kicker">Our products</h1>
+      <p class="hero__sub">Curated UHPC surfaces and textures for architecture & interiors</p>
     </section>
 
-    <!-- Collections Grid -->
-    <section class="collections">
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Travertine.png" alt="Travertine"><p>Travertine</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Damascus.png" alt="Damascus"><p>Damascus</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/BushHammered.png" alt="Bush Hammered"><p>Bush Hammered</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Taklamar.png" alt="Taklamar"><p>Taklamar</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/RawGrey.png" alt="Raw Grey"><p>Raw Grey</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/PrimeRaw.png" alt="Prime Raw"><p>Prime Raw</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/RawArchi.png" alt="Raw Archi"><p>Raw Archi</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Artisanal.png" alt="Artisanal"><p>Artisanal</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Wood.png" alt="Wood"><p>Wood</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/PatchWood.png" alt="Patch Wood"><p>Patch Wood</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Nature.png" alt="Nature"><p>Nature</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Colour.png" alt="Colour"><p>Colour</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Earth.png" alt="Earth"><p>Earth</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Cloud.png" alt="Cloud"><p>Cloud</p></div>
-      <div class="collection-item"><img src="/tekcouhpcwebsite/img/ProductsCover/Knit.png" alt="Knit"><p>Knit</p></div>
+    <!-- Grid -->
+    <section class="catalog">
+      <!-- 依序：从左到右、上到下 -->
+      <!-- 注意图片路径规则：img/ProductsCover/<NameNoSpace>.png -->
+
+      <!-- Travertine -->
+      <a class="tile" href="./travertine.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Travertine.png" alt="Travertine" />
+          <figcaption class="tile__label">Travertine</figcaption>
+        </figure>
+      </a>
+
+      <!-- Damascus -->
+      <a class="tile" href="./damascus.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Damascus.png" alt="Damascus" />
+          <figcaption class="tile__label">Damascus</figcaption>
+        </figure>
+      </a>
+
+      <!-- Bush Hammered -->
+      <a class="tile" href="./bush-hammered.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/BushHammered.png" alt="Bush Hammered" />
+          <figcaption class="tile__label">Bush Hammered</figcaption>
+        </figure>
+      </a>
+
+      <!-- Taklamar (你之前写过 Taklamakan/Taklamar，这里沿用 Taklamar；若文件名不同请按实际修正) -->
+      <a class="tile" href="./taklamar.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Taklamar.png" alt="Taklamar" />
+          <figcaption class="tile__label">Taklamar</figcaption>
+        </figure>
+      </a>
+
+      <!-- Raw Grey -->
+      <a class="tile" href="./raw-grey.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/RawGrey.png" alt="Raw Grey" />
+          <figcaption class="tile__label">Raw Grey</figcaption>
+        </figure>
+      </a>
+
+      <!-- Prime Raw -->
+      <a class="tile" href="./prime-raw.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/PrimeRaw.png" alt="Prime Raw" />
+          <figcaption class="tile__label">Prime Raw</figcaption>
+        </figure>
+      </a>
+
+      <!-- Raw Archi -->
+      <a class="tile" href="./raw-archi.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/RawArchi.png" alt="Raw Archi" />
+          <figcaption class="tile__label">Raw Archi</figcaption>
+        </figure>
+      </a>
+
+      <!-- Artisanal -->
+      <a class="tile" href="./artisanal.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Artisanal.png" alt="Artisanal" />
+          <figcaption class="tile__label">Artisanal</figcaption>
+        </figure>
+      </a>
+
+      <!-- Wood -->
+      <a class="tile" href="./wood.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Wood.png" alt="Wood" />
+          <figcaption class="tile__label">Wood</figcaption>
+        </figure>
+      </a>
+
+      <!-- Patch Wood -->
+      <a class="tile" href="./patch-wood.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/PatchWood.png" alt="Patch Wood" />
+          <figcaption class="tile__label">Patch Wood</figcaption>
+        </figure>
+      </a>
+
+      <!-- Nature -->
+      <a class="tile" href="./nature.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Nature.png" alt="Nature" />
+          <figcaption class="tile__label">Nature</figcaption>
+        </figure>
+      </a>
+
+      <!-- Colour -->
+      <a class="tile" href="./colour.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Colour.png" alt="Colour" />
+          <figcaption class="tile__label">Colour</figcaption>
+        </figure>
+      </a>
+
+      <!-- Earth -->
+      <a class="tile" href="./earth.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Earth.png" alt="Earth" />
+          <figcaption class="tile__label">Earth</figcaption>
+        </figure>
+      </a>
+
+      <!-- Cloud -->
+      <a class="tile" href="./cloud.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Cloud.png" alt="Cloud" />
+          <figcaption class="tile__label">Cloud</figcaption>
+        </figure>
+      </a>
+
+      <!-- Knit -->
+      <a class="tile" href="./knit.html">
+        <figure class="tile__figure">
+          <img loading="lazy" src="../img/ProductsCover/Knit.png" alt="Knit" />
+          <figcaption class="tile__label">Knit</figcaption>
+        </figure>
+      </a>
+
     </section>
   </main>
 
-  <script src="/tekcouhpcwebsite/assets/header.js"></script>
+  <script src="../assets/header.js"></script>
 </body>
 </html>
