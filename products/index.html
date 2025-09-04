@@ -1,5 +1,4 @@
-<!-- products page version 0.2.7 -->
-
+<!-- products page version 0.2.8a -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,16 +14,79 @@
   <link rel="stylesheet" href="../assets/header.css">
   <link rel="stylesheet" href="../assets/softload.css">
 
-  <!-- 兜底样式，防止 logo 过大 -->
+  <!-- 兜底样式：logo 尺寸，防止外链未加载时过大 -->
   <style>
     .tk-logo img { height: 28px; width: auto; display: block; }
   </style>
 
+  <!-- 兜底样式：最小版 header 布局（外链 header.css 失效时顶上） -->
   <style>
-    :root{ --bg:#fdfcf8; --ink:#0b0b0b; --muted:#6b6b6b; }
+    :root{
+      --bg:#fdfcf8;
+      --ink:#0b0b0b;
+      --muted:#6b6b6b;
+      --divider:#e7e3dc;
+    }
     html,body{margin:0;padding:0;background:var(--bg)}
     body{font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
 
+    /* ===== Header minimal fallback ===== */
+    .tk-header{
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--divider);
+      backdrop-filter: saturate(160%) blur(6px);
+    }
+    .tk-header__inner{
+      max-width: 1240px; margin: 0 auto; padding: 14px 20px;
+      display: grid; grid-template-columns: auto 1fr auto;
+      align-items: center; gap: 16px;
+    }
+    .tk-logo img{ display:block; height:28px; width:auto; }
+
+    .tk-nav--desktop{
+      display:flex; align-items:center; gap:28px; justify-self:center;
+    }
+    .tk-nav--desktop a{
+      text-decoration:none; color:var(--ink);
+      font-family:"europa","EuropaGrotesk",Arial,sans-serif;
+      font-weight:700; letter-spacing:.02em; font-size:14px;
+      padding:8px 6px; border-radius:8px;
+    }
+    .tk-nav--desktop a.is-active{ background:#efeee9; }
+
+    .tk-burger{
+      display:none; appearance:none; border:0; background:transparent;
+      width:42px; height:36px; border-radius:10px; position:relative; cursor:pointer;
+    }
+    .tk-burger span{
+      position:absolute; left:10px; right:10px; height:2px; background:var(--ink);
+      transform-origin:center; transition:transform .25s ease, opacity .25s ease, top .25s ease;
+    }
+    .tk-burger span:nth-child(1){ top:11px; }
+    .tk-burger span:nth-child(2){ top:17px; }
+    .tk-burger span:nth-child(3){ top:23px; }
+    .tk-burger.is-open span:nth-child(1){ top:17px; transform:rotate(45deg); }
+    .tk-burger.is-open span:nth-child(2){ opacity:0; }
+    .tk-burger.is-open span:nth-child(3){ top:17px; transform:rotate(-45deg); }
+
+    .tk-nav--mobile{
+      display:grid; gap:8px; padding:10px 20px 16px;
+      border-top:1px solid var(--divider); background:var(--bg);
+    }
+    .tk-nav--mobile a{
+      text-decoration:none; color:var(--ink);
+      font-family:"europa","EuropaGrotesk",Arial,sans-serif;
+      font-weight:700; font-size:14px; padding:10px 8px; border-radius:8px;
+    }
+    .tk-nav--mobile a.is-active{ background:#efeee9; }
+
+    @media (max-width:960px){
+      .tk-nav--desktop{ display:none; }
+      .tk-burger{ display:block; justify-self:end; }
+    }
+
+    /* ===== Page styles (与你现有保持一致) ===== */
     .hero{padding:64px 20px 24px;max-width:1200px;margin:0 auto;text-align:center}
     .hero__kicker{margin:0;font-family:"europa","EuropaGrotesk","Nunito",Arial,sans-serif;font-weight:800;letter-spacing:-.01em;font-size:clamp(28px,3.5vw,44px)}
     .hero__sub{margin:12px 0 0;color:var(--muted);font-weight:400;font-size:clamp(14px,2.2vw,16px)}
