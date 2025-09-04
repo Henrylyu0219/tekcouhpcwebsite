@@ -6,16 +6,124 @@
   <title>Products - TekcoUHPC</title>
 
   <!-- Fonts -->
-  <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css"><!-- Europa via Typekit -->
+  <!-- Europa via Adobe Typekit -->
+  <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css">
+  <!-- Nunito via Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Base & Header CSS -->
+  <!-- Global Header CSS -->
   <link rel="stylesheet" href="../assets/header.css" />
-  <!-- Products CSS -->
-  <link rel="stylesheet" href="../assets/products.css" />
+  <!-- Soft-load effects (skeleton + fade-in) -->
+  <link rel="stylesheet" href="../assets/softload.css" />
+
+  <style>
+    /* Page-local styles (保持轻量，不新增 assets 子目录) */
+    :root{
+      --bg:#fdfcf8;
+      --ink:#0b0b0b;
+      --muted:#6b6b6b;
+      --divider:#e7e3dc;
+    }
+    html,body{margin:0;padding:0;background:var(--bg)}
+    body{
+      font-family:"Nunito", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    /* Hero */
+    .hero{
+      padding: 64px 20px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero__kicker{
+      margin: 0;
+      font-family: "europa", "EuropaGrotesk", "Nunito", Arial, sans-serif; /* Europa 优先 */
+      font-weight: 800;
+      letter-spacing: -.01em;
+      font-size: clamp(28px, 3.5vw, 44px);
+    }
+    .hero__sub{
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: clamp(14px, 2.2vw, 16px);
+    }
+
+    /* Catalog Grid */
+    .catalog{
+      --columns: 3;                /* 桌面端列数 */
+      --gap-x: 28px;               /* 横向间距（更宽） */
+      --gap-y: 32px;               /* 纵向间距（更大，避免黏连） */
+      max-width: 1240px;
+      margin: 24px auto 96px;
+      padding: 0 20px;
+
+      display: grid;
+      grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+      gap: var(--gap-y) var(--gap-x);
+    }
+    @media (min-width: 1400px){
+      .catalog{ max-width: 1380px; --columns: 4; }
+    }
+    @media (max-width: 960px){
+      .catalog{ --columns: 2; --gap-x: 20px; --gap-y: 26px; }
+    }
+    @media (max-width: 560px){
+      .catalog{ --columns: 1; --gap-x: 16px; --gap-y: 22px; }
+    }
+
+    /* Tile */
+    .tile{
+      text-decoration: none;
+      color: inherit;
+      display:block;
+    }
+    .tile__figure{
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f2efe8;
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+      outline: 1px solid var(--divider);
+      transition: transform .25s ease, box-shadow .25s ease;
+      aspect-ratio: 4 / 3;  /* 统一比例，视觉更整洁 */
+    }
+    .tile__figure:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .tile__figure img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    /* 左下角标签（与图片左对齐） */
+    .tile__label{
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      margin: 0;
+      padding: 8px 10px 7px;
+      border-radius: 10px;
+      font-family:"Nunito", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(13px, 1.8vw, 14px);
+      line-height: 1;
+      color: #0a0a0a;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: saturate(140%) blur(4px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 4px 10px rgba(0,0,0,.06);
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Global Header -->
   <header class="tk-header">
     <div class="tk-header__inner">
       <a class="tk-logo" href="../index.html" aria-label="TekcoUHPC Home">
@@ -43,13 +151,13 @@
   <main class="page-products">
     <section class="hero">
       <h1 class="hero__kicker">Our products</h1>
-      <p class="hero__sub">Curated UHPC surfaces and textures for architecture & interiors</p>
+      <p class="hero__sub">Curated UHPC surfaces and textures for architecture &amp; interiors</p>
     </section>
 
-    <!-- Grid -->
-    <section class="catalog">
-      <!-- 依序：从左到右、上到下 -->
-      <!-- 注意图片路径规则：img/ProductsCover/<NameNoSpace>.png -->
+    <!-- Catalog Grid -->
+    <section class="catalog fx-softload">
+      <!-- 依序：从左到右、上到下；图片放在 ../img/ProductsCover/，两词合并无空格 -->
+      <!-- 如果你的文件名有大小写差异，请按实际文件名调整 src -->
 
       <!-- Travertine -->
       <a class="tile" href="./travertine.html">
@@ -75,7 +183,7 @@
         </figure>
       </a>
 
-      <!-- Taklamar (你之前写过 Taklamakan/Taklamar，这里沿用 Taklamar；若文件名不同请按实际修正) -->
+      <!-- Taklamar（如你的库里是 Taklamakan，请同步改 src 文件名） -->
       <a class="tile" href="./taklamar.html">
         <figure class="tile__figure">
           <img loading="lazy" src="../img/ProductsCover/Taklamar.png" alt="Taklamar" />
@@ -163,17 +271,19 @@
         </figure>
       </a>
 
-      <!-- Knit -->
+      <!-- Knit（如存在） -->
       <a class="tile" href="./knit.html">
         <figure class="tile__figure">
           <img loading="lazy" src="../img/ProductsCover/Knit.png" alt="Knit" />
           <figcaption class="tile__label">Knit</figcaption>
         </figure>
       </a>
-
     </section>
   </main>
 
+  <!-- Global JS -->
   <script src="../assets/header.js"></script>
+  <!-- Soft-load effects -->
+  <script src="../assets/softload.js"></script>
 </body>
 </html>
