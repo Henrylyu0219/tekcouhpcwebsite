@@ -1,3 +1,5 @@
+<!-- version 0.2.3-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,38 +11,44 @@
   <link rel="stylesheet" href="https://use.typekit.net/jry3xql.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Global & Effects CSS（用 BASE 前缀，见下面脚本） -->
-  <script>
-    // 统一管理路径前缀：部署在根目录用 ''；部署在 /tekcouhpc 用 '/tekcouhpc'
-    window.__BASE_PATH__ = '';  // 改这里即可
-  </script>
-  <script>
-    (function(){
-      const BASE = window.__BASE_PATH__ || '';
-      const link = (href) => {
-        const l = document.createElement('link');
-        l.rel = 'stylesheet';
-        l.href = BASE + href;
-        document.write(l.outerHTML);
-      };
-      // header.css & softload.css
-      link('/assets/header.css');
-      link('/assets/softload.css');
-    })();
-  </script>
+  <!-- 用相对路径，避免子目录部署导致 404 -->
+  <link rel="stylesheet" href="../assets/header.css" />
+  <link rel="stylesheet" href="../assets/softload.css" />
+
+  <style>
+    :root{ --bg:#fdfcf8; --ink:#0b0b0b; --muted:#6b6b6b; }
+    html,body{margin:0;padding:0;background:var(--bg)}
+    body{font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
+
+    .hero{padding:64px 20px 24px;max-width:1200px;margin:0 auto;text-align:center}
+    .hero__kicker{margin:0;font-family:"europa","EuropaGrotesk","Nunito",Arial,sans-serif;font-weight:800;letter-spacing:-.01em;font-size:clamp(28px,3.5vw,44px)}
+    .hero__sub{margin:12px 0 0;color:var(--muted);font-weight:400;font-size:clamp(14px,2.2vw,16px)}
+
+    /* 下面不改你原来的 tile 尺寸/间距，只提供必要的基础样式 */
+    .catalog{max-width:1240px;margin:24px auto 96px;padding:0 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 28px}
+    @media (min-width:1400px){.catalog{max-width:1380px;grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media (max-width:960px){.catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 20px}}
+    @media (max-width:560px){.catalog{grid-template-columns:1fr;gap:22px 16px}}
+
+    .tile{display:block;text-decoration:none;color:inherit}
+    .tile__figure{position:relative;border-radius:16px;overflow:hidden;outline:1px solid #e7e3dc;box-shadow:0 1px 0 rgba(0,0,0,.02);transition:transform .25s ease,box-shadow .25s ease;aspect-ratio:4/3}
+    .tile__figure:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .tile__figure img{width:100%;height:100%;object-fit:cover;display:block}
+    .tile__label{position:absolute;left:12px;bottom:12px;margin:0;padding:8px 10px 7px;border-radius:10px;font-weight:700;font-size:clamp(13px,1.8vw,14px);line-height:1;background:rgba(255,255,255,.78);backdrop-filter:saturate(140%) blur(4px)}
+  </style>
 </head>
 <body>
   <!-- Header -->
   <header class="tk-header">
     <div class="tk-header__inner">
-      <a class="tk-logo" href="" aria-label="TekcoUHPC Home" id="homeLink">
-        <img id="logoImg" alt="TekcoUHPC" />
+      <a class="tk-logo" href="../index.html" aria-label="TekcoUHPC Home">
+        <img src="../assets/logo.svg" alt="TekcoUHPC" />
       </a>
 
       <nav class="tk-nav tk-nav--desktop">
-        <a id="navHome">Home</a>
-        <a class="is-active" id="navProducts">Products</a>
-        <a id="navContact">Contact</a>
+        <a href="../index.html">Home</a>
+        <a class="is-active" href="./index.html">Products</a>
+        <a href="../contact/index.html">Contact</a>
       </nav>
 
       <button class="tk-burger" aria-label="Open Menu" aria-expanded="false">
@@ -49,86 +57,54 @@
     </div>
 
     <nav class="tk-nav tk-nav--mobile" hidden>
-      <a id="mnavHome">Home</a>
-      <a class="is-active" id="mnavProducts">Products</a>
-      <a id="mnavContact">Contact</a>
+      <a href="../index.html">Home</a>
+      <a class="is-active" href="./index.html">Products</a>
+      <a href="../contact/index.html">Contact</a>
     </nav>
   </header>
 
   <main class="page-products">
-    <!-- 保留你的原有标题/栅格样式；这里只提供容器 -->
     <section class="hero">
       <h1 class="hero__kicker">Our products</h1>
       <p class="hero__sub">Curated UHPC surfaces and textures for architecture &amp; interiors</p>
     </section>
 
-    <!-- 渲染容器（自动填充） -->
+    <!-- 动态渲染容器 -->
     <section class="catalog fx-softload" id="catalog"></section>
   </main>
 
-  <!-- Global & Effects JS（用 BASE 前缀加载） -->
-  <script>
-    (function(){
-      const BASE = window.__BASE_PATH__ || '';
-      const scr = (src) => {
-        const s = document.createElement('script');
-        s.src = BASE + src;
-        document.write(s.outerHTML);
-      };
-      scr('/assets/header.js');
-      scr('/assets/softload.js');
-    })();
-  </script>
+  <!-- 相对路径加载脚本 -->
+  <script src="../assets/header.js"></script>
+  <script src="../assets/softload.js"></script>
 
-  <!-- 页面渲染逻辑：从 JSON 读取并生成 tiles -->
+  <!-- 渲染逻辑：相对路径读取 JSON -->
   <script type="module">
-    const BASE = window.__BASE_PATH__ || '';
-
-    // 修正头部的链接与 logo 路径（避免相对路径失效）
-    (function fixHeaderPaths(){
-      const q = (id) => document.getElementById(id);
-      q('homeLink').href = BASE + '/index.html';
-      q('logoImg').src = BASE + '/assets/logo.svg';
-
-      q('navHome').href = BASE + '/index.html';
-      q('navProducts').href = BASE + '/products/index.html';
-      q('navContact').href = BASE + '/contact/index.html';
-
-      q('mnavHome').href = BASE + '/index.html';
-      q('mnavProducts').href = BASE + '/products/index.html';
-      q('mnavContact').href = BASE + '/contact/index.html';
-    })();
-
-    // 渲染 catalog
     async function renderCatalog(){
-      const res = await fetch(BASE + '/assets/products.json', { cache: 'no-cache' });
-      const items = await res.json();
+      try{
+        const res = await fetch('../assets/products.json', { cache: 'no-cache' });
+        if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+        const items = await res.json();
 
-      // 如果你希望只存 name/slug，让图片名自动推导，也可以启用下面这个函数替换 img：
-      // const toImg = (name) => name.replace(/\s+/g,'') + '.png';
+        const IMG_DIR = '../img/ProductsCover/';
+        const html = items.map(({name, slug, img}) => `
+          <a class="tile" href="./${slug}.html">
+            <figure class="tile__figure">
+              <img loading="lazy" src="${IMG_DIR}${img}" alt="${name}" />
+              <figcaption class="tile__label">${name}</figcaption>
+            </figure>
+          </a>
+        `).join('');
 
-      const IMG_DIR = BASE + '/img/ProductsCover/';
-      const html = items.map(({name, slug, img}) => `
-        <a class="tile" href="./${slug}.html">
-          <figure class="tile__figure">
-            <img loading="lazy" src="${IMG_DIR}${img}" alt="${name}" />
-            <figcaption class="tile__label">${name}</figcaption>
-          </figure>
-        </a>
-      `).join('');
-
-      const el = document.getElementById('catalog');
-      el.innerHTML = html;
-
-      // 绑定柔和加载效果到新生成的节点
-      if (window.tkSoftloadInit) window.tkSoftloadInit(el);
+        const el = document.getElementById('catalog');
+        el.innerHTML = html;
+        if (window.tkSoftloadInit) window.tkSoftloadInit(el);
+      }catch(err){
+        console.error('Failed to load products.json:', err);
+        document.getElementById('catalog').innerHTML =
+          '<p style="color:#888">Failed to load products.</p>';
+      }
     }
-
-    renderCatalog().catch(err => {
-      console.error('Render products failed:', err);
-      const el = document.getElementById('catalog');
-      el.innerHTML = '<p style="color:#888">Failed to load products.</p>';
-    });
+    renderCatalog();
   </script>
 </body>
 </html>
